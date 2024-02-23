@@ -1,2 +1,13 @@
+@import "./base/reset.scss";
+@import "./abstracts/_variables.scss";
+
 @import "./pages/home.scss";
 @import "./pages/photographer.scss";
+
+@import "./components/card-photographer.scss";
+@import "./components/card-media.scss";
+@import "./components/header.scss";
+@import "./components/header-photographer.scss";
+@import "./components/modal-lightbox.scss";
+@import "./components/modal-form.scss";
+@import "./components/dropdown.scss";
