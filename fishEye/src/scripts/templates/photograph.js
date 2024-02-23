@@ -6,14 +6,7 @@ function photographerTemplate(data) {
 
   function getUserCardDOM() {
     const article = document.createElement("article");
-    article.classList.add("photographer-card");
-    const link = document.createElement("a");
-    link.setAttribute("href", `./photographer.html?id=${id}`);
-    const img = document.createElement("img");
-    img.classList.add("photographer-portrait");
-    img.setAttribute("src", picture);
-    img.setAttribute("alt", name);
-    img.setAttribute("aria-label", `Image of photographer ${name}`);
+    article.classList.add("photographer-profile");
     const h2 = document.createElement("h2");
     h2.textContent = name;
     h2.classList.add("photographer-name");
@@ -23,15 +16,17 @@ function photographerTemplate(data) {
     const tagLine = document.createElement("p");
     tagLine.textContent = tagline;
     tagLine.classList.add("photographer-tagline");
-    const priceElement = document.createElement("p");
-    priceElement.textContent = `${price}€/jour`;
-    priceElement.classList.add("photographer-price");
-    article.appendChild(link);
-    link.appendChild(img);
-    link.appendChild(h2);
+    const img = document.createElement("img");
+    img.classList.add("photographer-portrait");
+    img.setAttribute("src", picture);
+    img.setAttribute("alt", name);
+    img.setAttribute("aria-label", `Image of photographer ${name}`);
+    article.appendChild(h2);
     article.appendChild(location);
     article.appendChild(tagLine);
-    article.appendChild(priceElement);
+    const contactButton = document.querySelector(".contact_button");
+    console.log(contactButton, "contactButton");
+    contactButton.insertAdjacentElement("afterend", img);
 
     return article;
   }
