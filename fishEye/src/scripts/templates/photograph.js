@@ -5,12 +5,15 @@ function photographerTemplate(data) {
   const picture = `./src/assets/photographers/Photographers_ID_Photos/${portrait}`;
 
   function getUserCardDOM() {
+    // Create the header
     const article = document.createElement("article");
     article.classList.add("photographer-profile");
     const h2 = document.createElement("h2");
     h2.textContent = name;
     h2.classList.add("photographer-name");
-    const location = document.createElement("p");
+    const info = document.createElement("div");
+    info.classList.add("photographer-info");
+    const location = document.createElement("h3");
     location.textContent = `${country}, ${city}`;
     location.classList.add("photographer-location");
     const tagLine = document.createElement("p");
@@ -22,10 +25,10 @@ function photographerTemplate(data) {
     img.setAttribute("alt", name);
     img.setAttribute("aria-label", `Image of photographer ${name}`);
     article.appendChild(h2);
-    article.appendChild(location);
-    article.appendChild(tagLine);
+    article.appendChild(info);
+    info.appendChild(location);
+    info.appendChild(tagLine);
     const contactButton = document.querySelector(".contact_button");
-    console.log(contactButton, "contactButton");
     contactButton.insertAdjacentElement("afterend", img);
 
     return article;

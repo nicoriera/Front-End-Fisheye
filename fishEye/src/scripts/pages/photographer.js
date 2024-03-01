@@ -19,7 +19,6 @@ async function displayData(photographer) {
 async function init(id) {
   // Récupère les datas des photographes
   const { photographers } = await getPhotographers(id);
-  console.log(photographers, "photographers");
   const photographer = photographers.find(
     (photographer) => photographer.id == id
   );
@@ -27,3 +26,15 @@ async function init(id) {
 }
 
 init(id);
+
+// Dropdown menu
+function openDropdown() {
+  var menu = document.getElementById("dropdownMenu");
+  var menuIcon = document.getElementById("dropdownIcon");
+
+  // Toggle l'affichage du menu
+  menu.style.display = menu.style.display === "none" ? "block" : "none";
+
+  // Toggle l'icône de l'icone du menu
+  menuIcon.classList.toggle("fa-chevron-down");
+}

@@ -8,6 +8,10 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/a26836ded1.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Fisheye - photographe</title>
   </head>
   <body>
@@ -26,6 +30,62 @@
         <button class="contact_button" onclick="displayModal()">
           Contactez-moi
         </button>
+      </div>
+      <div id="photograph-filter">
+        <p>Trier par</p>
+        <div class="dropdown">
+          <button
+            id="dropdownButton"
+            class="dropdown-button"
+            role="button"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            onclick="openDropdown()"
+          >
+            Popularité
+            <i
+              id="dropdownIcon"
+              class="dropdown-icon fa-solid fa-chevron-up"
+            ></i>
+          </button>
+          <ul
+            id="dropdownMenu"
+            class="dropdown-menu"
+            role="listbox"
+            aria-labelledby="dropdownButton"
+            style="display: none"
+          >
+            <li class="dropdown-menu-item" role="option" aria-selected="false">
+              Date
+            </li>
+            <li class="dropdown-menu-item" role="option" aria-selected="false">
+              Titre
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="media-content">
+        <div class="media-card">
+          <img
+            src="./src/assets/photographers/Mimi/Animals_Rainbow.jpg"
+            alt="photographer name"
+          />
+          <div>
+            <p id="media-name">Arc-en-ciel</p>
+            <p id="media-like-number">12</p>
+            <i class="fa-solid fa-heart media-like-icon"></i>
+          </div>
+        </div>
+        <div class="insert">
+          <div class="insert-like">
+            <p>297 081</p>
+            <i class="fa-solid fa-heart media-like-icon"></i>
+          </div>
+          <div class="insert-price">
+            <p>300€ / jour</p>
+          </div>
+        </div>
       </div>
     </main>
     <div id="contact_modal">
