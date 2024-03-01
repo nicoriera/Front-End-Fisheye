@@ -1,5 +1,4 @@
 function photographerTemplate(data) {
-  console.log(data, "data");
   const { name, portrait, country, city, tagline, price, id } = data;
 
   const picture = `./src/assets/photographers/Photographers_ID_Photos/${portrait}`;
@@ -33,5 +32,6 @@ function photographerTemplate(data) {
 
     return article;
   }
+
   return { name, picture, getUserCardDOM };
 }
