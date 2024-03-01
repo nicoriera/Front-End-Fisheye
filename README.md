@@ -14,6 +14,10 @@ Ouvre automatiquement votre navigateur par défaut à l'adresse [http://localhos
 Le projet se recharge automatiquement si vous apportez des modifications au code source.\
 Vous pouvez également consulter la console du navigateur pour voir les erreurs éventuelles.
 
+### `npm run dev`
+
+Cette commande lance à la fois le script pour surveiller les modifications dans les fichiers Sass et le script pour démarrer l'application en mode développement.
+
 ## Dépendances de développement
 
 Ce projet utilise Live Server pour faciliter le développement. Les dépendances sont répertoriées dans le fichier `package.json`. Assurez-vous d'exécuter `npm install` pour installer les dépendances nécessaires avant d'exécuter l'application.

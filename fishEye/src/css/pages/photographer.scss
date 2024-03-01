@@ -1,3 +1,18 @@
 #contact_modal {
   display: none;
 }
+
+#photograph-filter {
+  display: flex;
+
+  align-items: center;
+  margin: 0 100px;
+  padding: 2rem 0;
+  color: #000;
+
+  font-family: "DM Sans";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}

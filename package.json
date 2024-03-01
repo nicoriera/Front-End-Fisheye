@@ -1,9 +1,12 @@
 {
   "name": "fish-eye",
   "scripts": {
-    "start": "live-server ./fishEye"
+    "start": "live-server ./fishEye",
+    "watch-sass": "sass --watch fishEye/src/css/main.scss:fishEye/src/css/main.css",
+    "dev": "concurrently \"npm run watch-sass\" \"npm start\""
   },
   "devDependencies": {
-    "live-server": "^1.2.2"
+    "live-server": "^1.2.2",
+    "concurrently": "^6.0.2"
   }
 }

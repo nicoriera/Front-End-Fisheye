@@ -22,6 +22,19 @@ body {
   display: none;
 }
 
+#photograph-filter {
+  display: flex;
+  align-items: center;
+  margin: 0 100px;
+  padding: 2rem 0;
+  color: #000;
+  font-family: "DM Sans";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
 article a {
   display: flex;
   flex-direction: column;
@@ -93,6 +106,58 @@ article .photographer-price {
   height: 50px;
 }
 
+.dropdown {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0 20px;
+  padding: 2rem 0;
+}
+
+.dropdown-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.3125rem;
+  background: #901c1c;
+  color: #fff;
+  text-align: left;
+  padding: 21px;
+  width: 170px;
+  height: 70px;
+  font-family: "DM Sans";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 90px;
+  left: 0;
+  border-radius: 0.3125rem;
+  background: #901c1c;
+  color: #fff;
+  padding: 11px;
+  width: 170px;
+  height: 110px;
+  font-family: "DM Sans";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  z-index: 1;
+}
+
+.dropdown-menu-item {
+  padding: 11px;
+  border-top: 1px solid #fff;
+}
+
 .photograph-header {
   display: flex;
   justify-content: space-between;
@@ -105,6 +170,9 @@ article .photographer-price {
   margin: 0 100px;
   padding: 40px;
 }
+.photograph-header .photographer-name {
+  font-size: 4rem;
+}
 .photograph-header .contact_button {
   font-size: 20px;
   font-weight: bold;
@@ -116,6 +184,21 @@ article .photographer-price {
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.photographer-info {
+  display: flex;
+  flex-direction: column;
+  height: 4rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+.photographer-info .photographer-location {
+  font-size: 1.5rem;
+}
+.photographer-info .photographer-tagline {
+  font-size: 1.125rem;
 }
 
 #contact_modal {
