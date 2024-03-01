@@ -1,0 +1,37 @@
+#insert {
+  display: inline-flex;
+  align-items: center;
+  position: fixed;
+  bottom: -15px;
+  right: 30px;
+
+  justify-content: space-between;
+  border-radius: 0.3125rem;
+  background: #db8876;
+  width: 23.5rem;
+  height: 5.5625rem;
+  font-family: "DM Sans";
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  .insert-content {
+    display: flex;
+    align-items: center;
+
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 1.25rem;
+
+    .insert-like {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        margin-right: 0.3125rem;
+      }
+    }
+  }
+}
