@@ -223,7 +223,7 @@ article .photographer-price {
 #content-media .card-media:hover .card-media-content {
   background-color: rgba(0, 0, 0, 0.8);
 }
-#content-media .info-media {
+#content-media .card-media-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -236,12 +236,12 @@ article .photographer-price {
   text-align: center;
   padding: 0.5rem 0;
 }
-#content-media .info-media .like-info-media {
+#content-media .card-media-info .card-media-like {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#content-media .info-media .like-info-media p {
+#content-media .card-media-info .card-media-like p {
   margin-right: 5px;
 }
 
