@@ -1,6 +1,13 @@
+let photographersData = null;
+
+async function fetchData() {
+  const response = await fetch("./src/data/photographers.json");
+  if (!response.ok) throw new Error("Network response was not ok.");
+  photographersData = await response.json();
+}
+
+// PHOTOGRAPHER
 async function getPhotographer(id) {
-  const fetchPhotographers = await fetch("./src/data/photographers.json");
-  const photographersData = await fetchPhotographers.json();
   const photographer = photographersData.photographers.find(
     (p) => p.id === parseInt(id)
   );
@@ -30,11 +37,9 @@ async function init(id) {
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
-init(id);
 
+// MEDIA
 async function getMedia(photographerId) {
-  const fetchPhotographers = await fetch("./src/data/photographers.json");
-  const photographersData = await fetchPhotographers.json();
   const fullName = document.querySelector(".photographer-name");
   const namePart = fullName.textContent.split(" ");
   let firstName = namePart[0];
@@ -46,7 +51,6 @@ async function getMedia(photographerId) {
     (m) => m.photographerId === parseInt(photographerId)
   );
   media = media.map((m) => ({ ...m, firstName }));
-  console.log(media);
   return media;
 }
 
@@ -72,10 +76,62 @@ async function initMedia() {
   }
 }
 
-initMedia();
+// INSERT
+async function getInsert(photographerId) {
+  let dataInsert = photographersData.media.filter(
+    (m) => m.photographerId === parseInt(photographerId)
+  );
+
+  const allLikes = dataInsert.map((item) => item.likes);
+  const sumLikes = allLikes.reduce((acc, curr) => acc + curr);
+  const price = photographersData.photographers.find(
+    (p) => p.id === parseInt(photographerId)
+  ).price;
+
+  let insert = { photographerId, sumLikes, price };
+  console.log(insert, "insert");
+
+  return insert;
+}
+
+async function displayDataInsert(insert) {
+  const insertSection = document.querySelector("main");
+  if (!insert || insert.length === 0) {
+    console.error("No insert data found.");
+    return;
+  }
+
+  const insertObj = insertFactory(insert);
+  const userInsert = insertObj.createInsert();
+  insertSection.insertAdjacentHTML("beforeend", userInsert.outerHTML);
+}
+
+async function initInsert() {
+  try {
+    const inserts = await getInsert(id);
+    displayDataInsert(inserts);
+  } catch (error) {
+    console.error("Error initializing insert:", error);
+  }
+}
+
+async function initialize() {
+  try {
+    await fetchData();
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    await init(id);
+    await initMedia();
+    await initInsert(id);
+  } catch (error) {
+    console.error("Error initializing:", error);
+  }
+}
+
+initialize();
 
 // Dropdown menu
-function openDropdown() {
+function toggleDropdown() {
   var menu = document.getElementById("dropdownMenu");
   var menuIcon = document.getElementById("dropdownIcon");
 

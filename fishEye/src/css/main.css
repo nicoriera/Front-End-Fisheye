@@ -158,7 +158,7 @@ article .photographer-price {
   border-top: 1px solid #fff;
 }
 
-#insert {
+.insert {
   display: inline-flex;
   align-items: center;
   position: fixed;
@@ -175,26 +175,26 @@ article .photographer-price {
   font-weight: 500;
   line-height: normal;
 }
-#insert .insert-content {
+.insert .insert-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 0 1.25rem;
 }
-#insert .insert-content .insert-like {
+.insert .insert-content .insert-like {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#insert .insert-content .insert-like p {
+.insert .insert-content .insert-like p {
   margin-right: 0.3125rem;
 }
 
 #content-media {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 46px;
+  grid-column-gap: 30px;
   grid-row-gap: 40px;
   margin: 0 100px;
 }
@@ -245,7 +245,6 @@ article .photographer-price {
   align-items: center;
   border-radius: 0.3125rem;
   background-color: #fafafa;
-  width: 77.5rem;
   height: 19.5625rem;
   flex-shrink: 0;
   margin: 0 100px;
