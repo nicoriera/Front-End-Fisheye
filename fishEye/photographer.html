@@ -40,7 +40,7 @@
             role="button"
             aria-haspopup="listbox"
             aria-expanded="false"
-            onclick="openDropdown()"
+            onclick="toggleDropdown()"
           >
             Popularité
             <i
@@ -66,17 +66,6 @@
       </div>
 
       <div id="content-media"></div>
-      <div id="insert">
-        <div class="insert-content">
-          <div class="insert-like">
-            <p>297 081</p>
-            <i class="fa-solid fa-heart like-icon-media aria-label=likes"></i>
-          </div>
-          <div class="insert-price">
-            <p>300€ / jour</p>
-          </div>
-        </div>
-      </div>
     </main>
     <div id="contact_modal">
       <div class="modal">
@@ -95,6 +84,7 @@
     </div>
     <script src="./src/scripts/templates/photograph.js"></script>
     <script src="./src/scripts/templates/cardMedia.js"></script>
+    <script src="./src/scripts/templates/insert.js"></script>
     <script src="./src/scripts/pages/photographer.js"></script>
     <script src="./src/scripts/utils/contactForm.js"></script>
   </body>

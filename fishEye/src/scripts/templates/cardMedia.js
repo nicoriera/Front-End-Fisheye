@@ -19,7 +19,6 @@ MediaCard.prototype.createCard = function () {
   media.classList.add("card-media");
   const link = document.createElement("a");
   link.classList.add("card-media-link");
-
   let mediaElement;
   if (this.image) {
     mediaElement = document.createElement("img");
