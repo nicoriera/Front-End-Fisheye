@@ -35,10 +35,19 @@ init(id);
 async function getMedia(photographerId) {
   const fetchPhotographers = await fetch("./src/data/photographers.json");
   const photographersData = await fetchPhotographers.json();
-  const photographer = photographersData.photographers.find(
-    (p) => p.id === parseInt(photographerId)
+  const fullName = document.querySelector(".photographer-name");
+  const namePart = fullName.textContent.split(" ");
+  let firstName = namePart[0];
+  if (firstName.includes("-")) {
+    let nameParts = fullName.textContent.replace("-", " ").split(" ");
+    firstName = nameParts[0] + " " + nameParts[1];
+  }
+  let media = photographersData.media.filter(
+    (m) => m.photographerId === parseInt(photographerId)
   );
-  return photographer ? photographer.media : [];
+  media = media.map((m) => ({ ...m, firstName }));
+  console.log(media);
+  return media;
 }
 
 async function displayDataMedia(media) {
@@ -48,8 +57,8 @@ async function displayDataMedia(media) {
     return;
   }
   media.forEach((mediaItem) => {
-    const mediasModel = mediaCardTemplate(mediaItem);
-    const userCardMedia = mediasModel.getUserCardMedia();
+    const mediaCard = mediaCardFactory(mediaItem);
+    const userCardMedia = mediaCard.createCard();
     mediasSection.appendChild(userCardMedia);
   });
 }
