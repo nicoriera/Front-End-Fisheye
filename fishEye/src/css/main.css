@@ -1,13 +1,11 @@
 body {
   font-family: "DM Sans", sans-serif;
-  margin: 0;
 }
 
 .photographer_section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 70px;
-  margin-top: 100px;
 }
 
 .photographer_section article {
@@ -18,7 +16,8 @@ body {
   flex-direction: column;
 }
 
-#contact_modal {
+#contact_modal,
+#lightbox_modal {
   display: none;
 }
 
@@ -84,6 +83,10 @@ article .photographer-price {
   border-radius: 50%;
   display: block;
   object-fit: cover;
+}
+.photographer-portrait:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
 }
 
 #header {
@@ -205,6 +208,7 @@ article .photographer-price {
   height: 24rem;
   border-radius: 5px;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 #content-media .card-media .card-media-link {
   height: 18.75rem;
@@ -216,6 +220,10 @@ article .photographer-price {
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
+}
+#content-media .card-media .card-media-link:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
 }
 #content-media .card-media-info {
   display: flex;
@@ -339,6 +347,90 @@ form input {
   border-radius: 5px;
 }
 
+#lightbox_modal {
+  width: 100vw;
+  height: 100vh;
+  padding: 3rem 5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  background-color: white;
+}
+
+.lightbox-content {
+  width: 77.625rem;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.lightbox-content .lightbox-media {
+  width: 100%;
+  height: 100%;
+}
+.lightbox-content .lightbox-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.lightbox-content .lightbox-media p {
+  margin-top: 0.2rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: normal;
+  color: #901c1c;
+}
+.lightbox-content .lightbox-nav-left,
+.lightbox-content .lightbox-nav-right {
+  width: 6rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+}
+.lightbox-content .lightbox-nav-left svg:hover,
+.lightbox-content .lightbox-nav-right svg:hover {
+  transform: scale(1.2);
+  transition: all 0.3s ease-in-out;
+}
+.lightbox-content .lightbox-nav-right-content {
+  width: 6rem;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.lightbox-content .lightbox-nav-right-content .lightbox-nav-close {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+.lightbox-content .lightbox-nav-right-content .lightbox-nav-close svg:hover {
+  transform: scale(1.2) rotate(180deg);
+  transition: all 0.8s ease-in-out;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
 *,
 *:before,
 *:after {
@@ -449,6 +541,14 @@ table {
 
 input {
   border-radius: 0;
+}
+
+#main {
+  margin: 50px 0;
+}
+
+body.no-scroll {
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=main.css.map */

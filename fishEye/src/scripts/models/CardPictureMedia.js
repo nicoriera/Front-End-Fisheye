@@ -19,6 +19,12 @@ MediaCard.prototype.createCard = function () {
   media.classList.add("card-media");
   const link = document.createElement("a");
   link.classList.add("card-media-link");
+  link.setAttribute("aria-label", `View ${this.title}`);
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    displayModalLightbox();
+  });
+
   let mediaElement;
   if (this.image) {
     mediaElement = document.createElement("img");

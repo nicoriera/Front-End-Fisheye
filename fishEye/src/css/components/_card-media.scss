@@ -8,11 +8,11 @@
   .card-media {
     display: flex;
     flex-direction: column;
-
     width: 21.875rem;
     height: 24rem;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
 
     .card-media-link {
       height: 18.75rem;
@@ -24,6 +24,11 @@
         height: 100%;
         object-fit: cover;
         border-radius: 5px;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+        transition: all 0.3s ease-in-out;
       }
     }
   }

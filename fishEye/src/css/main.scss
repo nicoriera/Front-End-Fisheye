@@ -10,5 +10,14 @@
 @import "./components/_card-media.scss";
 @import "./components/_header-photographer.scss";
 @import "./components/_modal-form.scss";
+@import "./components/_modal-lightbox.scss";
 
 @import "./base/_reset.scss";
+
+#main {
+  margin: 50px 0;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
