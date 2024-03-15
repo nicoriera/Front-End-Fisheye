@@ -4,15 +4,18 @@ class App {
     this.photographersData = [];
     this.mediaData = [];
     this.insertData = [];
+    this.lightboxData = [];
   }
   async main() {
     try {
       this.photographersData = await this.getPhotographers();
       this.mediaData = await this.getMedia();
       this.insertData = await this.getInsert();
+      this.lightboxData = await this.getLightbox();
       this.displayDataPhotographers(this.photographersData);
       this.displayDataMedia(this.mediaData);
       this.displayDataInsert(this.insertData);
+      this.displayDataLightbox(this.lightboxData);
     } catch (error) {
       console.error("Error initializing app:", error);
     }

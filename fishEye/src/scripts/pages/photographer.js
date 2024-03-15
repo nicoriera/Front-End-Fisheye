@@ -89,7 +89,6 @@ async function getInsert(photographerId) {
   ).price;
 
   let insert = { photographerId, sumLikes, price };
-  console.log(insert, "insert");
 
   return insert;
 }
@@ -106,12 +105,65 @@ async function displayDataInsert(insert) {
   insertSection.insertAdjacentHTML("beforeend", userInsert.outerHTML);
 }
 
-async function initInsert() {
+async function initInsert(id) {
   try {
     const inserts = await getInsert(id);
     displayDataInsert(inserts);
   } catch (error) {
     console.error("Error initializing insert:", error);
+  }
+}
+
+// LIGHTBOX
+async function getLightbox(photographerId) {
+  const dataLightbox = photographersData.media.filter(
+    (m) => m.photographerId === parseInt(photographerId)
+  );
+  const fullName = document.querySelector(".photographer-name");
+  const namePart = fullName.textContent.split(" ");
+  let firstName = namePart[0];
+  if (firstName.includes("-")) {
+    let nameParts = fullName.textContent.replace("-", " ").split(" ");
+    firstName = nameParts[0] + " " + nameParts[1];
+  }
+  const images = dataLightbox
+    .filter((item) => item.image)
+    .map((item) => ({ image: item.image, title: item.title }));
+
+  const videos = dataLightbox
+    .filter((item) => item.video)
+    .map((item) => ({ video: item.video, title: item.title }));
+
+  const lightbox = { images, videos, firstName };
+  return lightbox;
+}
+
+async function displayDataLightbox(lightbox) {
+  const lightboxSection = document.querySelector("#lightbox_modal");
+  if (!lightbox || lightbox.length === 0) {
+    console.error("No lightbox data found.");
+    return;
+  }
+  const lightboxObj = lightboxFactory(lightbox);
+  const userLightbox = lightboxObj.createLightbox();
+  lightboxSection.insertAdjacentHTML("beforeend", userLightbox.outerHTML);
+
+  const closeNav = document.querySelector(".lightbox-nav-close");
+  closeNav.onclick = closeModaLightbox;
+
+  const leftNav = document.querySelector(".lightbox-nav-left");
+  leftNav.onclick = previousMedia;
+
+  const rightNav = document.querySelector(".lightbox-nav-right");
+  rightNav.onclick = nextMedia;
+}
+
+async function initLightbox(id) {
+  try {
+    const lightbox = await getLightbox(id);
+    displayDataLightbox(lightbox);
+  } catch (error) {
+    console.error("Error initializing lightbox:", error);
   }
 }
 
@@ -123,6 +175,7 @@ async function initialize() {
     await init(id);
     await initMedia();
     await initInsert(id);
+    await initLightbox(id);
   } catch (error) {
     console.error("Error initializing:", error);
   }
