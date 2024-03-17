@@ -1,7 +1,13 @@
+$lightbox-width: 100%;
+$lightbox-height: 56.25rem;
+$nav-width: 6rem;
+$transition-duration: 0.3s;
+$hover-scale: 1.2;
+
 #lightbox_modal {
   width: 100vw;
   height: 100vh;
-  padding: 3rem 5rem;
+  margin: 0 auto;
   position: fixed;
   top: 0;
   left: 0;
@@ -11,87 +17,81 @@
 
 .lightbox-content {
   width: 77.625rem;
-  height: 100%;
+  height: 56.25rem;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: row;
 
   .lightbox-media {
-    width: 100%;
-    height: 100%;
+    width: 65.625rem;
+    height: 56.25rem;
+    flex-shrink: 0;
     display: flex;
+    align-items: center;
     flex-direction: row;
+    overflow: hidden;
   }
 
   .lightbox-media-container {
     display: flex;
     flex-direction: column;
-    margin: 0 10rem;
 
-    img {
-      width: 60rem;
+    img,
+    video {
+      width: 65.625rem;
       height: 40rem;
+      flex-shrink: 0;
       object-fit: cover;
       border-radius: 5px;
     }
+
     p {
-      margin: 0.2rem 0 2rem 0;
+      margin-top: 0.5rem;
       font-family: $base-font-family;
-      font-size: 1.5rem;
+      font-size: $base-font-size;
       font-weight: 400;
-      line-height: normal;
-      color: $text-color-secondary;
+      color: $primary-color;
     }
   }
 
   .lightbox-nav-left,
-  .lightbox-nav-right {
-    width: 6rem;
-    height: 100%;
+  .lightbox-nav-right,
+  .lightbox-nav-right-content,
+  .lightbox-nav-close {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-width: $nav-width;
+    max-height: 40rem;
     cursor: pointer;
     background-color: white;
     border: none;
 
     svg {
       &:hover {
-        transform: scale(1.2);
-        transition: all 0.3s ease-in-out;
+        transform: scale($hover-scale);
+        transition: all $transition-duration ease-in-out;
       }
     }
   }
 
-  .lightbox-nav-right-content {
-    width: 6rem;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    align-items: center;
-
-    .lightbox-nav-close {
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: none;
-      background-color: white;
-      cursor: pointer;
-
-      svg {
-        &:hover {
-          transform: scale(1.2) rotate(180deg);
-          transition: all 0.8s ease-in-out;
-        }
+  .lightbox-nav-close {
+    svg {
+      &:hover {
+        transform: scale($hover-scale) rotate(180deg);
+        transition: all 0.8s ease-in-out;
       }
     }
+  }
+}
+
+@keyframes carousel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
 

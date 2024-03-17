@@ -1,5 +1,5 @@
 class ModalLightbox {
-  constructor(data) {
+  constructor(data, initialIndex = 2) {
     this._media = [...data.images, ...data.videos].map((item) => ({
       src: `./src/assets/photographers/${data.firstName}/${
         item.image || item.video
@@ -8,7 +8,23 @@ class ModalLightbox {
       type: item.image ? "img" : "video",
     }));
 
-    this._currentMediaIndex = 0;
+    this._currentMediaIndex = initialIndex;
+    console.log(this._media);
+    console.log(this._currentMediaIndex);
+  }
+
+  displayMedia(index) {
+    const lightboxMedia = document.querySelector(".lightbox-media-container");
+    while (lightboxMedia.firstChild) {
+      lightboxMedia.removeChild(lightboxMedia.firstChild);
+    }
+    lightboxMedia.appendChild(this.createMediaElement(this._media[index]));
+  }
+
+  closeModaLightbox() {
+    const modalLightbox = document.getElementById("lightbox_modal");
+    modalLightbox.style.display = "none";
+    document.body.classList.remove("no-scroll");
   }
 
   previousMedia() {
@@ -23,9 +39,34 @@ class ModalLightbox {
     this.displayMedia(this._currentMediaIndex);
   }
 
+  setCurrentMediaIndex(index) {
+    if (index >= 0 && index < this._media.length) {
+      this._currentMediaIndex === index;
+      console.log(this._currentMediaIndex === index);
+      this.displayMedia(this._currentMediaIndex);
+    } else {
+      console.error("Index out of bounds");
+    }
+  }
+
+  attachNavigationHandlers() {
+    const leftNav = document.querySelector(".lightbox-nav-left");
+    leftNav.onclick = () => this.previousMedia();
+
+    const rightNav = document.querySelector(".lightbox-nav-right");
+    rightNav.onclick = () => this.nextMedia();
+
+    const closeNav = document.querySelector(".lightbox-nav-close");
+    closeNav.onclick = () => this.closeModalLightbox();
+  }
+
   createMediaElement(media) {
     const mediaElement = document.createElement(media.type);
     mediaElement.setAttribute("src", media.src);
+
+    if (media.type === "video") {
+      mediaElement.setAttribute("controls", "true");
+    }
 
     const title = document.createElement("p");
     title.classList.add("lightbox-title");
@@ -78,7 +119,8 @@ class ModalLightbox {
     nav.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none">
       <path d="${pathData}" fill="#911C1C"/>
     </svg>`;
-    nav.onclick = className === "lightbox-nav-left" ? previousMedia : nextMedia;
+    nav.onclick =
+      className === "lightbox-nav-left" ? this.previousMedia : this.nextMedia;
     return nav;
   }
 
@@ -95,11 +137,12 @@ class ModalLightbox {
         </clipPath>
       </defs>
     </svg>`;
-    closeNav.onclick = closeModaLightbox;
+    closeNav.onclick = this.closeModaLightbox;
     return closeNav;
   }
 }
 
-function lightboxFactory(data) {
-  return new ModalLightbox(data);
+function lightboxFactory(data, initialIndex) {
+  const lightbox = new ModalLightbox(data, initialIndex);
+  return lightbox;
 }

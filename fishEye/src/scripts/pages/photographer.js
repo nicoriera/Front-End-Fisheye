@@ -138,30 +138,32 @@ async function getLightbox(photographerId) {
   return lightbox;
 }
 
-async function displayDataLightbox(lightbox) {
+async function displayDataLightbox(lightbox, initialIndex) {
   const lightboxSection = document.querySelector("#lightbox_modal");
   if (!lightbox || lightbox.length === 0) {
     console.error("No lightbox data found.");
     return;
   }
-  const lightboxObj = lightboxFactory(lightbox);
+
+  const lightboxObj = lightboxFactory(lightbox, initialIndex);
   const userLightbox = lightboxObj.createLightbox();
-  lightboxSection.insertAdjacentHTML("beforeend", userLightbox.outerHTML);
+  lightboxSection.innerHTML = ""; // Clear the lightbox section before adding new content
+  lightboxSection.appendChild(userLightbox); // Append the lightbox element to the section
 
   const closeNav = document.querySelector(".lightbox-nav-close");
-  closeNav.onclick = closeModaLightbox;
+  closeNav.onclick = () => lightboxObj.closeModaLightbox();
 
   const leftNav = document.querySelector(".lightbox-nav-left");
-  leftNav.onclick = previousMedia;
+  leftNav.onclick = () => lightboxObj.previousMedia();
 
   const rightNav = document.querySelector(".lightbox-nav-right");
-  rightNav.onclick = nextMedia;
+  rightNav.onclick = () => lightboxObj.nextMedia();
 }
 
-async function initLightbox(id) {
+async function initLightbox(id, initialIndex) {
   try {
     const lightbox = await getLightbox(id);
-    displayDataLightbox(lightbox);
+    displayDataLightbox(lightbox, initialIndex);
   } catch (error) {
     console.error("Error initializing lightbox:", error);
   }
