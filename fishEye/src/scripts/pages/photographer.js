@@ -64,6 +64,20 @@ async function displayDataMedia(media) {
     const mediaCard = mediaCardFactory(mediaItem);
     const userCardMedia = mediaCard.createCard();
     mediasSection.appendChild(userCardMedia);
+    // Add event listener for the like button of this media
+    const likeButton = userCardMedia.querySelector(".like-button");
+    if (likeButton) {
+      likeButton.addEventListener("click", async function () {
+        mediaItem.likes++; // increment the likes of the media
+
+        // Now update the sumLikes in the insert
+        const insert = await getInsert(mediaItem.photographerId);
+        if (insert) {
+          insert.sumLikes++; // increment the sumLikes
+          displayDataInsert(insert); // update the display
+        }
+      });
+    }
   });
 }
 
@@ -77,18 +91,31 @@ async function initMedia() {
 }
 
 // INSERT
+let insertsData = new Map(); // Map to store the insert data
+
 async function getInsert(photographerId) {
+  photographerId = parseInt(photographerId);
+
+  // Check if the insert data for this photographer id already exists
+  if (insertsData.has(photographerId)) {
+    return insertsData.get(photographerId);
+  }
+
   let dataInsert = photographersData.media.filter(
-    (m) => m.photographerId === parseInt(photographerId)
+    (m) => m.photographerId === photographerId
   );
 
   const allLikes = dataInsert.map((item) => item.likes);
-  const sumLikes = allLikes.reduce((acc, curr) => acc + curr);
+  const sumLikes = allLikes.reduce((acc, curr) => acc + curr, 0);
+
   const price = photographersData.photographers.find(
-    (p) => p.id === parseInt(photographerId)
+    (p) => p.id === photographerId
   ).price;
 
   let insert = { photographerId, sumLikes, price };
+
+  // Store the insert data in the map
+  insertsData.set(photographerId, insert);
 
   return insert;
 }
@@ -158,6 +185,26 @@ async function displayDataLightbox(lightbox, initialIndex) {
 
   const rightNav = document.querySelector(".lightbox-nav-right");
   rightNav.onclick = () => lightboxObj.nextMedia();
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      lightboxObj.closeModaLightbox();
+    } else if (event.key === "ArrowLeft") {
+      lightboxObj.previousMedia();
+    } else if (event.key === "ArrowRight") {
+      lightboxObj.nextMedia();
+    } else if (event.key === " ") {
+      const lightboxMedia = document.querySelector(".lightbox-media-container");
+      const video = lightboxMedia.querySelector("video");
+
+      console.log(video, "video");
+      if (video & video.paused) {
+        video.play();
+      } else if (video) {
+        video.pause();
+      }
+    }
+  });
 }
 
 async function initLightbox(id, initialIndex) {
@@ -174,6 +221,7 @@ async function initialize() {
     await fetchData();
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
+
     await init(id);
     await initMedia();
     await initInsert(id);

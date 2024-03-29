@@ -1,5 +1,12 @@
 #contact_modal {
-  display: none;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  background-color: white;
 }
 
 .modal {
@@ -17,6 +24,7 @@
 .modal header {
   justify-content: space-between;
   width: 100%;
+  border: 1px solid #312e2e;
 }
 
 .modal header img {

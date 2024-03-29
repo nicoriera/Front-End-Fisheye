@@ -2,6 +2,7 @@ class Insert {
   constructor(data) {
     this.sumLikes = data.sumLikes;
     this.price = data.price;
+    this.likesElement = null;
   }
 
   createInsert() {
@@ -13,6 +14,8 @@ class Insert {
     like.classList.add("insert-like");
     const numberLikes = document.createElement("p");
     numberLikes.textContent = this.sumLikes;
+    this.likesElement = document.createElement("p");
+    this.likesElement.textContent = this.sumLikes;
     const heart = document.createElement("i");
     heart.classList.add("fas", "fa-heart");
     const priceContent = document.createElement("div");
@@ -27,6 +30,13 @@ class Insert {
     insert.appendChild(content);
 
     return insert;
+  }
+
+  updateLikes() {
+    this.sumLikes++;
+    if (this.likesElement) {
+      this.likesElement.textContent = this.sumLikes;
+    }
   }
 }
 

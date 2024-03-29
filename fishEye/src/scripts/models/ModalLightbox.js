@@ -9,8 +9,6 @@ class ModalLightbox {
     }));
 
     this._currentMediaIndex = initialIndex;
-    console.log(this._media);
-    console.log(this._currentMediaIndex);
   }
 
   displayMedia(index) {
@@ -49,17 +47,6 @@ class ModalLightbox {
     }
   }
 
-  attachNavigationHandlers() {
-    const leftNav = document.querySelector(".lightbox-nav-left");
-    leftNav.onclick = () => this.previousMedia();
-
-    const rightNav = document.querySelector(".lightbox-nav-right");
-    rightNav.onclick = () => this.nextMedia();
-
-    const closeNav = document.querySelector(".lightbox-nav-close");
-    closeNav.onclick = () => this.closeModalLightbox();
-  }
-
   createMediaElement(media) {
     const mediaElement = document.createElement(media.type);
     mediaElement.setAttribute("src", media.src);
@@ -89,9 +76,6 @@ class ModalLightbox {
       "M61.6399 66.36L43.3199 48L61.6399 29.64L55.9999 24L31.9999 48L55.9999 72L61.6399 66.36Z"
     );
 
-    const rightNavContent = document.createElement("div");
-    rightNavContent.classList.add("lightbox-nav-right-content");
-
     const rightNav = this.createNavButton(
       "lightbox-nav-right",
       "M34.3601 29.64L52.6801 48L34.3601 66.36L40.0001 72L64.0001 48L40.0001 24L34.3601 29.64Z"
@@ -99,7 +83,10 @@ class ModalLightbox {
 
     const closeNav = this.createCloseButton();
 
-    rightNavContent.appendChild(closeNav, rightNav);
+    const rightNavContent = document.createElement("div");
+    rightNavContent.classList.add("lightbox-nav-right-content");
+    rightNavContent.appendChild(closeNav);
+    rightNavContent.appendChild(rightNav);
 
     const media = document.createElement("div");
     media.classList.add("lightbox-media");
@@ -108,9 +95,21 @@ class ModalLightbox {
       media.appendChild(mediaContainer);
     });
 
-    content.append(leftNav, media, rightNav, rightNavContent);
+    content.append(leftNav, media, rightNavContent);
 
     return content;
+  }
+
+  playPauseMedia() {
+    const lightboxMedia = document.querySelector(".lightbox-media-container");
+    const video = lightboxMedia.querySelector("video");
+    if (video) {
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    }
   }
 
   createNavButton(className, pathData) {
@@ -121,6 +120,10 @@ class ModalLightbox {
     </svg>`;
     nav.onclick =
       className === "lightbox-nav-left" ? this.previousMedia : this.nextMedia;
+
+    const label = className === "lightbox-nav-left" ? "Previous" : "Next";
+    nav.setAttribute("aria-label", label);
+
     return nav;
   }
 
@@ -137,7 +140,9 @@ class ModalLightbox {
         </clipPath>
       </defs>
     </svg>`;
-    closeNav.onclick = this.closeModaLightbox;
+    closeNav.onclick = this.closeModalLightbox;
+
+    closeNav.setAttribute("aria-label", "Close");
     return closeNav;
   }
 }
