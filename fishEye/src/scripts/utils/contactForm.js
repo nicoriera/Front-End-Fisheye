@@ -1,11 +1,11 @@
 function displayModal() {
   const modal = document.getElementById("contact_modal");
-  modal.style.display = "block";
-  // document.body.classList.add("no-scroll");
+  modal.style.display = "flex";
+  document.body.classList.add("no-scroll");
 }
 
-function closeModal() {
-  const modal = document.getElementById("contact_modal");
+function closeModalContact() {
+  const modal = document.querySelector(".modal-close-button");
   modal.style.display = "none";
   document.body.classList.remove("no-scroll");
 }
