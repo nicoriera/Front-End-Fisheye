@@ -1,9 +1,16 @@
 let photographersData = null;
 
 async function fetchData() {
-  const response = await fetch("./src/data/photographers.json");
-  if (!response.ok) throw new Error("Network response was not ok.");
-  photographersData = await response.json();
+  try {
+    const response = await fetch("./src/data/photographers.json");
+    if (!response.ok) {
+      throw new Error("Network response was not ok.");
+    }
+    photographersData = await response.json();
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Arrête l'exécution en lançant l'erreur
+  }
 }
 
 // PHOTOGRAPHER
@@ -28,10 +35,13 @@ async function displayData(photographer) {
 
 async function init(id) {
   try {
+    await fetchData();
     const photographer = await getPhotographer(id);
     displayData(photographer);
   } catch (error) {
-    console.error("Error initializing photographer:", error);
+    console.error("Error initializing:", error);
+    // Arrête l'exécution en lançant l'erreur
+    throw error;
   }
 }
 
@@ -78,6 +88,27 @@ async function displayDataMedia(media) {
         }
       });
     }
+
+    // Add event listener for the media link
+    userCardMedia.addEventListener("keydown", (e) => {
+      if (e.key === "Tab") {
+        e.preventDefault();
+        const nextMedia = media[index + 1];
+        if (nextMedia) {
+          const nextMediaCard = mediasSection.querySelector(
+            `#media-${nextMedia.id}`
+          );
+          if (nextMediaCard) {
+            nextMediaCard.focus();
+          }
+        } else {
+          const firstMediaCard = mediasSection.querySelector(".card-media");
+          if (firstMediaCard) {
+            firstMediaCard.focus();
+          }
+        }
+      }
+    });
   });
 }
 
@@ -216,16 +247,63 @@ async function initLightbox(id, initialIndex) {
   }
 }
 
+// CONTACT FORM
+async function getContactForm(photographerId) {
+  const contactForm = photographersData.photographers.find(
+    (p) => p.id === parseInt(photographerId)
+  );
+  return contactForm;
+}
+
+async function displayDataContactForm(contactForm) {
+  const contactFormSection = document.querySelector("#contact_modal");
+  console.log(contactFormSection, "contactFormSection");
+  if (!contactForm || contactForm.length === 0) {
+    console.error("No contact form data found.");
+    return;
+  }
+
+  const contactFormObj = contactFormFactory(contactForm);
+  const userContactForm = contactFormObj.createForm();
+  contactFormSection.appendChild(userContactForm);
+
+  const form = document.querySelector(".modal-form-element");
+  form.addEventListener("submit", contactFormObj.handleSubmit);
+
+  const closeContactForm = document.querySelector(".modal-close-button");
+  closeContactForm.onclick = () => {
+    contactFormSection.style.display = "none";
+    document.body.classList.remove("no-scroll");
+  };
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      contactFormSection.style.display = "none";
+      document.body.classList.remove("no-scroll");
+    }
+  });
+}
+
+async function initContactForm(id) {
+  try {
+    const contactForm = await getContactForm(id);
+    displayDataContactForm(contactForm);
+  } catch (error) {
+    console.error("Error initializing contact form:", error);
+  }
+}
+
+// INITIALIZE PAGE
 async function initialize() {
   try {
     await fetchData();
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
-
     await init(id);
     await initMedia();
     await initInsert(id);
     await initLightbox(id);
+    await initContactForm(id);
   } catch (error) {
     console.error("Error initializing:", error);
   }
