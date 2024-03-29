@@ -46,9 +46,20 @@ MediaCard.prototype.createCard = function () {
   const like = document.createElement("div");
   like.classList.add("card-media-like");
   const heart = document.createElement("i");
-  heart.classList.add("fas", "fa-heart");
+  heart.classList.add("fas", "fa-heart", "like-button");
+  heart.setAttribute("aria-label", "likes");
   const likes = document.createElement("p");
   likes.textContent = this.likes;
+
+  const addLike = (e) => {
+    e.preventDefault();
+    this.likes++;
+    likes.textContent = this.likes;
+    e.currentTarget.removeEventListener("click", addLike);
+  };
+
+  heart.addEventListener("click", addLike);
+
   media.appendChild(link);
   link.appendChild(mediaElement);
   media.appendChild(info);

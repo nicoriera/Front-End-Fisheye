@@ -377,6 +377,8 @@ form input {
   overflow: hidden;
 }
 .lightbox-content .lightbox-media-container {
+  width: 65.625rem;
+  height: 40rem;
   display: flex;
   flex-direction: column;
 }
