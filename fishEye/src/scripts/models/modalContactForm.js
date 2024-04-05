@@ -6,87 +6,140 @@ class ModalForm {
   createForm() {
     const modalForm = document.createElement("div");
     modalForm.classList.add("modal-form");
+
     const modalFormHeader = document.createElement("header");
     modalFormHeader.classList.add("modal-form-header");
+
     const modalFormTitle = document.createElement("h2");
     modalFormTitle.classList.add("modal-form-title");
     modalFormTitle.textContent = `Contactez-moi ${this._name}`;
     modalFormHeader.appendChild(modalFormTitle);
+
     const modalCloseButton = document.createElement("img");
     modalCloseButton.classList.add("modal-close-button");
-    modalCloseButton.setAttribute("src", "./src/assets/icons/close.svg");
-    modalCloseButton.setAttribute("alt", "Fermer la fenêtre modale");
+    modalCloseButton.src = "./src/assets/icons/close.svg";
+    modalCloseButton.alt = "Fermer la fenêtre modale";
     modalFormHeader.appendChild(modalCloseButton);
+
     const modalFormElement = document.createElement("form");
     modalFormElement.classList.add("modal-form-element");
-    modalFormElement.setAttribute("action", "");
-    modalFormElement.setAttribute("method", "post");
-    const modalFormFirstName = document.createElement("label");
-    modalFormFirstName.classList.add("modal-form-firstname");
-    modalFormFirstName.setAttribute("for", "firstname");
-    modalFormFirstName.textContent = "Prénom";
-    const modalFormFirstNameInput = document.createElement("input");
-    modalFormFirstNameInput.classList.add("modal-form-firstname-input");
-    modalFormFirstNameInput.setAttribute("type", "text");
-    modalFormFirstNameInput.setAttribute("id", "firstname");
-    modalFormFirstNameInput.setAttribute("name", "firstname");
-    modalFormFirstNameInput.setAttribute("required", "");
-    modalFormFirstNameInput.addEventListener("input", (e) => {
-      console.log(e.target.value);
+
+    const validationMessage = document.createElement("div");
+    validationMessage.classList.add("modal-form-validation-message");
+    validationMessage.style.display = "none";
+    modalForm.appendChild(validationMessage);
+
+    modalFormElement.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      // Vérifiez la validité de vos champs d'entrée ici
+
+      let allFieldsAreValid = true;
+      const inputs = modalFormElement.querySelectorAll("input, textarea");
+      inputs.forEach((input) => {
+        if (input.value.trim() === "") {
+          allFieldsAreValid = false;
+          input.classList.add("error-input");
+        } else {
+          input.classList.remove("error-input");
+        }
+      });
+
+      const emailInput = modalFormElement.querySelector(
+        ".modal-form-email-input"
+      );
+      if (!validateEmail(emailInput.value)) {
+        allFieldsAreValid = false;
+        emailInput.classList.add("error-input");
+      }
+
+      if (allFieldsAreValid) {
+        validationMessage.textContent =
+          "Votre message a été envoyé avec succès !";
+        validationMessage.style.display = "block";
+        modalFormHeader.style.display = "none";
+        modalFormElement.style.display = "none";
+        modalFormElement.reset();
+      }
     });
 
-    modalFormElement.appendChild(modalFormFirstName);
-    modalFormElement.appendChild(modalFormFirstNameInput);
-    const modalFormName = document.createElement("label");
-    modalFormName.classList.add("modal-form-name");
-    modalFormName.setAttribute("for", "name");
-    modalFormName.textContent = "Nom";
-    const modalFormNameInput = document.createElement("input");
-    modalFormNameInput.classList.add("modal-form-name-input");
-    modalFormNameInput.setAttribute("type", "text");
-    modalFormNameInput.setAttribute("id", "name");
-    modalFormNameInput.setAttribute("name", "name");
-    modalFormNameInput.setAttribute("required", "");
-    modalFormNameInput.addEventListener("input", (e) => {
-      console.log(e.target.value);
-    });
-    modalFormElement.appendChild(modalFormName);
-    modalFormElement.appendChild(modalFormNameInput);
-    const modalFormEmail = document.createElement("label");
-    modalFormEmail.classList.add("modal-form-email");
-    modalFormEmail.setAttribute("for", "email");
-    modalFormEmail.textContent = "Email";
-    const modalFormEmailInput = document.createElement("input");
-    modalFormEmailInput.classList.add("modal-form-email-input");
-    modalFormEmailInput.setAttribute("type", "email");
-    modalFormEmailInput.setAttribute("id", "email");
-    modalFormEmailInput.setAttribute("name", "email");
-    modalFormEmailInput.setAttribute("required", "");
-    modalFormEmailInput.addEventListener("input", (event) => {
-      console.log(event.target.value);
-    });
+    const createInputField = (
+      labelText,
+      inputType,
+      inputId,
+      inputName,
+      required,
+      errorText
+    ) => {
+      const label = document.createElement("label");
+      label.classList.add(`modal-form-${inputName}`);
+      label.textContent = labelText;
 
-    modalFormElement.appendChild(modalFormEmail);
-    modalFormElement.appendChild(modalFormEmailInput);
-    const modalFormMessage = document.createElement("label");
-    modalFormMessage.classList.add("modal-form-message");
-    modalFormMessage.setAttribute("for", "message");
-    modalFormMessage.textContent = "Votre message";
-    const modalFormMessageTextarea = document.createElement("textarea");
-    modalFormMessageTextarea.classList.add("modal-form-message-textarea");
-    modalFormMessageTextarea.setAttribute("id", "message");
-    modalFormMessageTextarea.setAttribute("name", "message");
-    modalFormMessageTextarea.setAttribute("required", "");
-    modalFormMessageTextarea.addEventListener("input", (event) => {
-      console.log(event.target.value);
-    });
-    modalFormElement.appendChild(modalFormMessage);
-    modalFormElement.appendChild(modalFormMessageTextarea);
+      let input;
+      if (inputType === "textarea") {
+        input = document.createElement("textarea");
+        input.rows = 5;
+        input.cols = 30;
+      } else {
+        input = document.createElement("input");
+        input.type = inputType;
+      }
+
+      input.classList.add(`modal-form-${inputName}-input`);
+      input.id = inputId;
+      input.name = inputName;
+      input.required = required;
+
+      const error = document.createElement("div");
+      error.classList.add(`modal-form-${inputName}-error`);
+
+      input.addEventListener("input", (event) => {
+        console.log(event.target.value);
+        if (event.target.value.trim() === "") {
+          error.textContent = errorText;
+          input.classList.add("error-input");
+        } else {
+          error.textContent = "";
+        }
+      });
+
+      modalFormElement.appendChild(label);
+      modalFormElement.appendChild(input);
+      modalFormElement.appendChild(error);
+    };
+
+    createInputField(
+      "Prénom",
+      "text",
+      "firstname",
+      "firstname",
+      true,
+      "Le prénom est requis."
+    );
+    createInputField("Nom", "text", "name", "name", true, "Le nom est requis.");
+    createInputField(
+      "Email",
+      "email",
+      "email",
+      "email",
+      true,
+      "L'email est invalide."
+    );
+    createInputField(
+      "Votre message",
+      "textarea",
+      "message",
+      "message",
+      true,
+      "Le message est requis."
+    );
+
     const modalFormSubmit = document.createElement("button");
     modalFormSubmit.classList.add("modal-form-submit");
-    modalFormSubmit.setAttribute("type", "submit");
+    modalFormSubmit.type = "submit";
     modalFormSubmit.textContent = "Envoyer";
     modalFormElement.appendChild(modalFormSubmit);
+
     modalForm.appendChild(modalFormHeader);
     modalForm.appendChild(modalFormElement);
 
@@ -96,4 +149,10 @@ class ModalForm {
 
 function contactFormFactory(data) {
   return new ModalForm(data);
+}
+
+function validateEmail(email) {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 }

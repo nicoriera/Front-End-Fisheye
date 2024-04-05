@@ -6,7 +6,8 @@
   left: 0;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background: rgba(196, 196, 196, 0.4);
+  box-shadow: -5px 10px 30px 0px rgba(0, 0, 0, 0.25);
 }
 
 .modal-form {
@@ -17,9 +18,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 1.5rem;
   margin: 2rem;
+  gap: 2rem;
 }
 
 .modal-form header {
@@ -68,10 +70,10 @@ form div {
 
 form input {
   width: 100%;
-  height: 3.5rem;
+  height: 2.5rem;
   border: none;
   border-radius: 5px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 form input::placeholder {
@@ -80,9 +82,8 @@ form input::placeholder {
   font-family: "DM Sans";
 }
 
-form textarea {
+.modal-form-message-input {
   width: 100%;
-  height: 100px;
   border: none;
   border-radius: 5px;
 }
@@ -94,7 +95,7 @@ form textarea::placeholder {
 }
 
 form button {
-  margin-top: 1rem;
+  margin-top: 2rem;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
@@ -107,4 +108,31 @@ form button {
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #b71c1c;
+  }
+}
+
+.modal-form-firstname-error,
+.modal-form-name-error,
+.modal-form-email-error,
+.modal-form-message-error {
+  color: #ff0000;
+  font-size: 0.8rem;
+  font-family: "DM Sans";
+  margin-bottom: 0.4rem;
+}
+
+.error-input {
+  border: 2px solid #ff0000;
+}
+
+.modal-form-validation-message {
+  font-size: 4rem;
+  font-family: "DM Sans";
+  margin-bottom: 0.4rem;
+  align-items: center;
 }
