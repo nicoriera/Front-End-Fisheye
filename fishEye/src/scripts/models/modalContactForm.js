@@ -94,7 +94,6 @@ class ModalForm {
       error.classList.add(`modal-form-${inputName}-error`);
 
       input.addEventListener("input", (event) => {
-        console.log(event.target.value);
         if (event.target.value.trim() === "") {
           error.textContent = errorText;
           input.classList.add("error-input");

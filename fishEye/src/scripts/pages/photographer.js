@@ -13,6 +13,9 @@ async function fetchData() {
   }
 }
 
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
 // PHOTOGRAPHER
 async function getPhotographer(id) {
   const photographer = photographersData.photographers.find(
@@ -45,13 +48,11 @@ async function init(id) {
   }
 }
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
-
 // MEDIA
 async function getMedia(photographerId) {
   const fullName = document.querySelector(".photographer-name");
   const namePart = fullName.textContent.split(" ");
+
   let firstName = namePart[0];
   if (firstName.includes("-")) {
     let nameParts = fullName.textContent.replace("-", " ").split(" ");
@@ -60,16 +61,19 @@ async function getMedia(photographerId) {
   let media = photographersData.media.filter(
     (m) => m.photographerId === parseInt(photographerId)
   );
+
   media = media.map((m) => ({ ...m, firstName }));
   return media;
 }
 
-async function displayDataMedia(media) {
+async function displayDataMedia(media, sortType) {
   const mediasSection = document.querySelector("#content-media");
+
   if (!media || media.length === 0) {
     console.error("No media data found.");
     return;
   }
+
   media.forEach((mediaItem) => {
     const mediaCard = mediaCardFactory(mediaItem);
     const userCardMedia = mediaCard.createCard();
@@ -118,6 +122,73 @@ async function initMedia() {
     displayDataMedia(medias);
   } catch (error) {
     console.error("Error initializing media:", error);
+  }
+}
+
+// DROPDOWN
+
+async function getDropdown(photographerId) {
+  const dropdown = photographersData.photographers.find(
+    (p) => p.id === parseInt(photographerId)
+  );
+
+  return { dropdown };
+}
+
+async function sortAndDisplayMedia(sortType) {
+  const mediaContainer = document.querySelector("#content-media");
+  if (!mediaContainer) {
+    console.error("Media container not found.");
+    return;
+  }
+
+  // Sélectionner toutes les cartes
+  const mediaCards = Array.from(mediaContainer.querySelectorAll(".card-media"));
+
+  // Trier les cartes en fonction du type de tri
+  mediaCards.sort((a, b) => {
+    const aValue = a.getAttribute(`data-${sortType}`);
+    const bValue = b.getAttribute(`data-${sortType}`);
+
+    if (sortType === "date") {
+      return new Date(bValue) - new Date(aValue);
+    } else if (sortType === "title") {
+      return aValue.localeCompare(bValue);
+    }
+  });
+
+  // Effacer le contenu du conteneur de médias
+  mediaContainer.innerHTML = "";
+
+  // Ajouter les cartes triées dans le conteneur
+  mediaCards.forEach((mediaCard) => {
+    mediaContainer.appendChild(mediaCard);
+  });
+}
+
+async function displayDataDropdown(dropdown) {
+  const dropdownSection = document.querySelector("#photograph-filter");
+  if (!dropdown) {
+    console.error("No dropdown data found.");
+    return;
+  }
+
+  const dropdownObj = dropdownFilterFactory(dropdown);
+  const userDropdown = dropdownObj.createDropdownFilter();
+  dropdownSection.appendChild(userDropdown);
+}
+
+async function initDropdown(id) {
+  try {
+    const { dropdown, media } = await getDropdown(id);
+    displayDataDropdown(dropdown);
+    const dropdownElement = document.querySelector("#photograph-filter button");
+    dropdownElement.addEventListener("change", () => {
+      const sortType = dropdownElement.value;
+      sortAndDisplayMedia(sortType);
+    });
+  } catch (error) {
+    console.error("Error initializing dropdown:", error);
   }
 }
 
@@ -227,8 +298,6 @@ async function displayDataLightbox(lightbox, initialIndex) {
     } else if (event.key === " ") {
       const lightboxMedia = document.querySelector(".lightbox-media-container");
       const video = lightboxMedia.querySelector("video");
-
-      console.log(video, "video");
       if (video & video.paused) {
         video.play();
       } else if (video) {
@@ -257,7 +326,6 @@ async function getContactForm(photographerId) {
 
 async function displayDataContactForm(contactForm) {
   const contactFormSection = document.querySelector("#contact_modal");
-  console.log(contactFormSection, "contactFormSection");
   if (!contactForm || contactForm.length === 0) {
     console.error("No contact form data found.");
     return;
@@ -299,11 +367,13 @@ async function initialize() {
     await fetchData();
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
-    await init(id);
-    await initMedia();
-    await initInsert(id);
-    await initLightbox(id);
-    await initContactForm(id);
+
+    await init(id); // Initialiser les données du photographe
+    await initMedia(); // Initialiser les médias du photographe
+    await initInsert(id); // Initialiser les insertions du photographe
+    await initLightbox(id); // Initialiser la lightbox du photographe
+    await initContactForm(id); // Initialiser le formulaire de contact du photographe
+    await initDropdown(id); // Initialiser la dropdown de tri des médias du photographe
   } catch (error) {
     console.error("Error initializing:", error);
   }
@@ -311,14 +381,11 @@ async function initialize() {
 
 initialize();
 
-// Dropdown menu
 function toggleDropdown() {
   var menu = document.getElementById("dropdownMenu");
   var menuIcon = document.getElementById("dropdownIcon");
 
-  // Toggle l'affichage du menu
   menu.style.display = menu.style.display === "none" ? "block" : "none";
-
-  // Toggle l'icône de l'icone du menu
   menuIcon.classList.toggle("fa-chevron-down");
+  menuIcon.classList.add("fa-chevron-up");
 }

@@ -31,39 +31,7 @@
           Contactez-moi
         </button>
       </div>
-      <div id="photograph-filter">
-        <p>Trier par</p>
-        <div class="dropdown">
-          <button
-            id="dropdownButton"
-            class="dropdown-button"
-            role="button"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            onclick="toggleDropdown()"
-          >
-            Popularité
-            <i
-              id="dropdownIcon"
-              class="dropdown-icon fa-solid fa-chevron-up"
-            ></i>
-          </button>
-          <ul
-            id="dropdownMenu"
-            class="dropdown-menu"
-            role="listbox"
-            aria-labelledby="dropdownButton"
-            style="display: none"
-          >
-            <li class="dropdown-menu-item" role="option" aria-selected="false">
-              Date
-            </li>
-            <li class="dropdown-menu-item" role="option" aria-selected="false">
-              Titre
-            </li>
-          </ul>
-        </div>
-      </div>
+      <div id="photograph-filter"></div>
       <div id="content-media"></div>
     </main>
     <div id="contact_modal">
@@ -76,6 +44,7 @@
     <script src="./src/scripts/models/insert.js"></script>
     <script src="./src/scripts/models/modalLightbox.js"></script>
     <script src="./src/scripts/models/modalContactForm.js"></script>
+    <script src="./src/scripts/models/dropdownFilter.js"></script>
     <script src="./src/scripts/pages/photographer.js"></script>
     <script src="./src/scripts/utils/contactForm.js"></script>
     <script src="./src/scripts/utils/modalLightbox.js"></script>

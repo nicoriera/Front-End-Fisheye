@@ -40,7 +40,6 @@ class ModalLightbox {
   setCurrentMediaIndex(index) {
     if (index >= 0 && index < this._media.length) {
       this._currentMediaIndex === index;
-      console.log(this._currentMediaIndex === index);
       this.displayMedia(this._currentMediaIndex);
     } else {
       console.error("Index out of bounds");

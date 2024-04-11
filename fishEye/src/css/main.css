@@ -140,12 +140,11 @@ article .photographer-price {
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 90px;
+  top: 100px;
   left: 0;
   border-radius: 0.3125rem;
   background: #901c1c;
   color: #fff;
-  padding: 11px;
   width: 170px;
   height: 110px;
   font-family: "DM Sans";
@@ -157,8 +156,29 @@ article .photographer-price {
 }
 
 .dropdown-menu-item {
-  padding: 11px;
-  border-top: 1px solid #fff;
+  align-items: center;
+  border-top-color: #fff;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  background: #901c1c;
+  color: #fff;
+  text-align: left;
+  padding: 21px;
+  width: 170px;
+  height: 70px;
+  font-family: "DM Sans";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.dropdown-menu-item:last-child {
+  border-radius: 0 0 0.3125rem 0.3125rem;
 }
 
 .insert {

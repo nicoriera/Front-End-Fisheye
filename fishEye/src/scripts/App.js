@@ -1,6 +1,8 @@
+import fetch from "node-fetch";
+
 class App {
   constructor() {
-    this.baseUrl = "http://localhost:3000/api/photographers";
+    this.baseUrl = "http://127.0.0.1:8080";
     this.photographersData = [];
     this.mediaData = [];
     this.insertData = [];
@@ -12,6 +14,7 @@ class App {
       this.mediaData = await this.getMedia();
       this.insertData = await this.getInsert();
       this.lightboxData = await this.getLightbox();
+
       this.displayDataPhotographers(this.photographersData);
       this.displayDataMedia(this.mediaData);
       this.displayDataInsert(this.insertData);
