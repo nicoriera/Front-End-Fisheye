@@ -1,35 +1,68 @@
-// Define a base class for MediaCard
-class CardVideoMedia {
+class VideoMediaCard {
   constructor(data) {
-    this._id = data.id;
-    this._title = data.title;
-    this._image = data.image;
-    this._video = data.video;
-    this._name = data.name;
-    this._firstName = data.firstName;
-    this._likes = data.likes;
-  }
-  get id() {
-    return this._id;
+    this.firstName = data.firstName;
+    this.video = data.video;
+    this.title = data.title;
+    this.date = data.date;
+    this.likes = data.likes;
   }
 
-  get title() {
-    return this._title;
-  }
+  createCard() {
+    const picture = `./src/assets/photographers/${this.firstName}/${this.video}`;
 
-  get video() {
-    return this._video;
-  }
+    const media = document.createElement("div");
+    media.classList.add("card-media");
+    media.setAttribute("tabindex", "0");
+    media.setAttribute("aria-label", `View ${this.title}`);
+    media.setAttribute("data-date", `${this.date}`);
+    media.setAttribute("data-title", `${this.title}`);
+    const link = document.createElement("a");
+    link.classList.add("card-media-link");
+    link.setAttribute("aria-label", `View ${this.title}`);
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      displayModalLightbox();
+    });
 
-  get name() {
-    return this._name;
-  }
+    const mediaElement = document.createElement("video");
+    mediaElement.setAttribute("src", video);
+    mediaElement.classList.add("card-media-video");
+    mediaElement.setAttribute("alt", this.name);
+    mediaElement.setAttribute(
+      "aria-label",
+      `Image of photographer ${this.name}`
+    );
 
-  get firstName() {
-    return this._firstName;
-  }
+    const info = document.createElement("div");
+    info.classList.add("card-media-info");
+    const title = document.createElement("p");
+    title.classList.add("card-media-title");
+    title.textContent = this.title;
+    const like = document.createElement("div");
+    like.classList.add("card-media-like");
+    const heart = document.createElement("i");
+    heart.classList.add("fas", "fa-heart", "like-button");
+    heart.setAttribute("aria-label", "likes");
+    const likes = document.createElement("p");
+    likes.textContent = this.likes;
 
-  get likes() {
-    return this._likes;
+    const addLike = (e) => {
+      e.preventDefault();
+      this.likes++;
+      likes.textContent = this.likes;
+      e.target.removeEventListener("click", addLike);
+    };
+
+    heart.addEventListener("click", addLike);
+
+    media.appendChild(link);
+    link.appendChild(mediaElement);
+    media.appendChild(info);
+    info.appendChild(title);
+    info.appendChild(like);
+    like.appendChild(likes);
+    like.appendChild(heart);
+
+    return media;
   }
 }

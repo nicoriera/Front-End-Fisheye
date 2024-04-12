@@ -69,13 +69,18 @@ async function getMedia(photographerId) {
 async function displayDataMedia(media, sortType) {
   const mediasSection = document.querySelector("#content-media");
 
+  if (!mediasSection) {
+    console.error("Medias section not found.");
+    return;
+  }
+
   if (!media || media.length === 0) {
     console.error("No media data found.");
     return;
   }
 
-  media.forEach((mediaItem) => {
-    const mediaCard = mediaCardFactory(mediaItem);
+  media.forEach((mediaItem, index) => {
+    const mediaCard = mediasFactory(mediaItem);
     const userCardMedia = mediaCard.createCard();
     mediasSection.appendChild(userCardMedia);
     // Add event listener for the like button of this media
@@ -126,7 +131,6 @@ async function initMedia() {
 }
 
 // DROPDOWN
-
 async function getDropdown(photographerId) {
   const dropdown = photographersData.photographers.find(
     (p) => p.id === parseInt(photographerId)
@@ -298,7 +302,7 @@ async function displayDataLightbox(lightbox, initialIndex) {
     } else if (event.key === " ") {
       const lightboxMedia = document.querySelector(".lightbox-media-container");
       const video = lightboxMedia.querySelector("video");
-      if (video & video.paused) {
+      if (video && video.paused) {
         video.play();
       } else if (video) {
         video.pause();

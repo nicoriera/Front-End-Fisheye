@@ -1,18 +1,14 @@
-class MediaCard {
+class PictureMediaCard {
   constructor(data) {
-    this.id = data.id;
-    this.title = data.title;
-    this.image = data.image;
-    this.video = data.video;
-    this.name = data.name;
     this.firstName = data.firstName;
-    this.likes = data.likes;
+    this.image = data.image;
+    this.title = data.title;
     this.date = data.date;
+    this.likes = data.likes;
   }
 
   createCard() {
     const picture = `./src/assets/photographers/${this.firstName}/${this.image}`;
-    const video = `./src/assets/photographers/${this.firstName}/${this.video}`;
 
     const media = document.createElement("div");
     media.classList.add("card-media");
@@ -28,14 +24,8 @@ class MediaCard {
       displayModalLightbox();
     });
 
-    let mediaElement;
-    if (this.image) {
-      mediaElement = document.createElement("img");
-      mediaElement.setAttribute("src", picture);
-    } else if (this.video) {
-      mediaElement = document.createElement("video");
-      mediaElement.setAttribute("src", video);
-    }
+    const mediaElement = document.createElement("img");
+    mediaElement.setAttribute("src", picture);
     mediaElement.classList.add("card-media-img");
     mediaElement.setAttribute("alt", this.name);
     mediaElement.setAttribute(
@@ -74,27 +64,5 @@ class MediaCard {
     like.appendChild(heart);
 
     return media;
-  }
-}
-
-class ImageCard extends MediaCard {
-  constructor(data) {
-    super(data);
-  }
-}
-
-class VideoCard extends MediaCard {
-  constructor(data) {
-    super(data);
-  }
-}
-
-function mediaCardFactory(data) {
-  if (data.image) {
-    return new ImageCard(data);
-  } else if (data.video) {
-    return new VideoCard(data);
-  } else {
-    return new MediaCard(data);
   }
 }
