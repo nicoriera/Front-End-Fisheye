@@ -113,7 +113,8 @@ class ModalForm {
       "firstname",
       "firstname",
       true,
-      "Le prénom est requis."
+      "Le prénom est requis.",
+      "Prénom"
     );
     createInputField("Nom", "text", "name", "name", true, "Le nom est requis.");
     createInputField(
@@ -122,7 +123,8 @@ class ModalForm {
       "email",
       "email",
       true,
-      "L'email est invalide."
+      "L'email est invalide.",
+      "Email"
     );
     createInputField(
       "Votre message",
@@ -130,7 +132,8 @@ class ModalForm {
       "message",
       "message",
       true,
-      "Le message est requis."
+      "Le message est requis.",
+      "Message"
     );
 
     const modalFormSubmit = document.createElement("button");

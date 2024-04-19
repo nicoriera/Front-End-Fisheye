@@ -1,14 +1,14 @@
-// Define a base class for MediaCard
-class CardVideoMedia {
+class PictureMedia {
   constructor(data) {
     this._id = data.id;
     this._title = data.title;
     this._image = data.image;
-    this._video = data.video;
     this._name = data.name;
     this._firstName = data.firstName;
     this._likes = data.likes;
+    this._date = data.date;
   }
+
   get id() {
     return this._id;
   }
@@ -17,8 +17,8 @@ class CardVideoMedia {
     return this._title;
   }
 
-  get video() {
-    return this._video;
+  get image() {
+    return `./src/assets/photographers/${this._firstName}/${this._image}`;
   }
 
   get name() {
@@ -31,5 +31,9 @@ class CardVideoMedia {
 
   get likes() {
     return this._likes;
+  }
+
+  get date() {
+    return this._date;
   }
 }

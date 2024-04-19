@@ -99,18 +99,6 @@ class ModalLightbox {
     return content;
   }
 
-  playPauseMedia() {
-    const lightboxMedia = document.querySelector(".lightbox-media-container");
-    const video = lightboxMedia.querySelector("video");
-    if (video) {
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
-      }
-    }
-  }
-
   createNavButton(className, pathData) {
     const nav = document.createElement("button");
     nav.classList.add(className);

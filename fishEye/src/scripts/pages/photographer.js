@@ -66,26 +66,32 @@ async function getMedia(photographerId) {
   return media;
 }
 
-async function displayDataMedia(media, sortType) {
+async function displayDataMedia(media) {
   const mediasSection = document.querySelector("#content-media");
+
+  if (!mediasSection) {
+    console.error("Medias section not found.");
+    return;
+  }
 
   if (!media || media.length === 0) {
     console.error("No media data found.");
     return;
   }
 
-  media.forEach((mediaItem) => {
-    const mediaCard = mediaCardFactory(mediaItem);
+  media.forEach((mediaItem, index) => {
+    const mediaInstance = MediasFactory.createMedia(mediaItem);
+    const mediaCard = new MediaCard(mediaInstance);
     const userCardMedia = mediaCard.createCard();
     mediasSection.appendChild(userCardMedia);
     // Add event listener for the like button of this media
     const likeButton = userCardMedia.querySelector(".like-button");
     if (likeButton) {
       likeButton.addEventListener("click", async function () {
-        mediaItem.likes++; // increment the likes of the media
+        mediaInstance.likes++; // increment the likes of the media
 
         // Now update the sumLikes in the insert
-        const insert = await getInsert(mediaItem.photographerId);
+        const insert = await getInsert(mediaInstance.photographerId);
         if (insert) {
           insert.sumLikes++; // increment the sumLikes
           displayDataInsert(insert); // update the display
@@ -126,7 +132,6 @@ async function initMedia() {
 }
 
 // DROPDOWN
-
 async function getDropdown(photographerId) {
   const dropdown = photographersData.photographers.find(
     (p) => p.id === parseInt(photographerId)
@@ -298,7 +303,7 @@ async function displayDataLightbox(lightbox, initialIndex) {
     } else if (event.key === " ") {
       const lightboxMedia = document.querySelector(".lightbox-media-container");
       const video = lightboxMedia.querySelector("video");
-      if (video & video.paused) {
+      if (video && video.paused) {
         video.play();
       } else if (video) {
         video.pause();
