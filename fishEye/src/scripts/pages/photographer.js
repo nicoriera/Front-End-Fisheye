@@ -66,7 +66,7 @@ async function getMedia(photographerId) {
   return media;
 }
 
-async function displayDataMedia(media, sortType) {
+async function displayDataMedia(media) {
   const mediasSection = document.querySelector("#content-media");
 
   if (!mediasSection) {
@@ -80,17 +80,18 @@ async function displayDataMedia(media, sortType) {
   }
 
   media.forEach((mediaItem, index) => {
-    const mediaCard = mediasFactory(mediaItem);
+    const mediaInstance = MediasFactory.createMedia(mediaItem);
+    const mediaCard = new MediaCard(mediaInstance);
     const userCardMedia = mediaCard.createCard();
     mediasSection.appendChild(userCardMedia);
     // Add event listener for the like button of this media
     const likeButton = userCardMedia.querySelector(".like-button");
     if (likeButton) {
       likeButton.addEventListener("click", async function () {
-        mediaItem.likes++; // increment the likes of the media
+        mediaInstance.likes++; // increment the likes of the media
 
         // Now update the sumLikes in the insert
-        const insert = await getInsert(mediaItem.photographerId);
+        const insert = await getInsert(mediaInstance.photographerId);
         if (insert) {
           insert.sumLikes++; // increment the sumLikes
           displayDataInsert(insert); // update the display

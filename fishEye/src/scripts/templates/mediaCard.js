@@ -19,7 +19,7 @@ class MediaCard {
     });
 
     let mediaElement;
-    if (this.image) {
+    if (this._media.image) {
       mediaElement = document.createElement("img");
       mediaElement.setAttribute("src", this._media.image);
     } else if (this._media.video) {

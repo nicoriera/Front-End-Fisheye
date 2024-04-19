@@ -1,13 +1,12 @@
 class VideoMedia {
   constructor(data) {
-    this.id = data.id;
-    this.title = data.title;
-    this.image = data.image;
-    this.video = data.video;
-    this.name = data.name;
-    this.firstName = data.firstName;
-    this.likes = data.likes;
-    this.date = data.date;
+    this._id = data.id;
+    this._title = data.title;
+    this._video = data.video;
+    this._name = data.name;
+    this._firstName = data.firstName;
+    this._likes = data.likes;
+    this._date = data.date;
   }
 
   get id() {

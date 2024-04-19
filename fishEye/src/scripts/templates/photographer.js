@@ -1,24 +1,24 @@
 function photographerTemplate(data) {
   const { name, portrait, country, city, tagline, price, id } = data;
 
-  const picture = `./src/assets/photographers/Photographers_ID_Photos/${portrait}`;
+  const pictureSrc = `./src/assets/photographers/Photographers_ID_Photos/${portrait}`;
 
   function getUserCardDOM() {
-    const article = document.createElement("article");
-    article.classList.add("photographer-card");
+    const card = document.createElement("article");
+    card.classList.add("photographer-card");
 
     const link = document.createElement("a");
     link.href = `./photographer.html?id=${id}`;
 
-    const img = document.createElement("img");
-    img.classList.add("photographer-portrait");
-    img.src = picture;
-    img.alt = name;
-    img.setAttribute("aria-label", `Image of photographer ${name}`);
+    const image = document.createElement("img");
+    image.classList.add("photographer-portrait");
+    image.src = pictureSrc;
+    image.alt = `Portrait de ${name}`;
+    image.setAttribute("aria-label", `Portrait du photographe ${name}`);
 
-    const h2 = document.createElement("h2");
-    h2.textContent = name;
-    h2.classList.add("photographer-name");
+    const heading = document.createElement("h2");
+    heading.textContent = name;
+    heading.classList.add("photographer-name");
 
     const location = document.createElement("p");
     location.textContent = `${country}, ${city}`;
@@ -32,15 +32,15 @@ function photographerTemplate(data) {
     priceElement.textContent = `${price}€/jour`;
     priceElement.classList.add("photographer-price");
 
-    article.appendChild(link);
-    link.appendChild(img);
-    link.appendChild(h2);
-    article.appendChild(location);
-    article.appendChild(tagLine);
-    article.appendChild(priceElement);
+    card.appendChild(link);
+    link.appendChild(image);
+    link.appendChild(heading);
+    card.appendChild(location);
+    card.appendChild(tagLine);
+    card.appendChild(priceElement);
 
-    return article;
+    return card;
   }
 
-  return { name, picture, getUserCardDOM };
+  return { name, pictureSrc, getUserCardDOM };
 }
