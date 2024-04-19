@@ -36,4 +36,8 @@ class VideoMedia {
   get date() {
     return this._date;
   }
+
+  like() {
+    this._likes++;
+  }
 }

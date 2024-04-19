@@ -1,16 +1,16 @@
 #content-media {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 30px;
-  grid-row-gap: 40px;
-  margin: 0 100px;
+  grid-column-gap: 1.875rem;
+  grid-row-gap: 2.5rem;
+  margin: 0 6.25rem;
 
   .card-media {
     display: flex;
     flex-direction: column;
     width: 21.875rem;
     height: 24rem;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 
@@ -23,7 +23,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 5px;
+        border-radius: 0.3125rem;
       }
 
       &:hover {
@@ -40,11 +40,12 @@
 
     color: #901c1c;
     font-family: "DM Sans";
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    text-align: center;
+    text-align: left;
     padding: 0.5rem 0;
 
     .card-media-like {

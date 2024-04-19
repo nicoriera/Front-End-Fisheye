@@ -9,7 +9,7 @@ async function fetchData() {
     photographersData = await response.json();
   } catch (error) {
     console.error("Error fetching data:", error);
-    throw error; // Arrête l'exécution en lançant l'erreur
+    throw error;
   }
 }
 
@@ -79,44 +79,40 @@ async function displayDataMedia(media) {
     return;
   }
 
+  const mediaCards = []; // Tableau pour stocker les cartes de média
+
   media.forEach((mediaItem, index) => {
     const mediaInstance = MediasFactory.createMedia(mediaItem);
     const mediaCard = new MediaCard(mediaInstance);
     const userCardMedia = mediaCard.createCard();
     mediasSection.appendChild(userCardMedia);
-    // Add event listener for the like button of this media
+    mediaCards.push(userCardMedia); // Ajouter la carte à notre tableau
+
     const likeButton = userCardMedia.querySelector(".like-button");
     if (likeButton) {
       likeButton.addEventListener("click", async function () {
-        mediaInstance.likes++; // increment the likes of the media
-
-        // Now update the sumLikes in the insert
-        const insert = await getInsert(mediaInstance.photographerId);
+        const insert = await getInsert(mediaCard.photographerId);
         if (insert) {
-          insert.sumLikes++; // increment the sumLikes
-          displayDataInsert(insert); // update the display
+          insert.sumLikes += 1;
+          displayDataInsert(insert);
+        } else {
+          console.error("No insert data found.");
         }
       });
     }
 
-    // Add event listener for the media link
     userCardMedia.addEventListener("keydown", (e) => {
       if (e.key === "Tab") {
         e.preventDefault();
-        const nextMedia = media[index + 1];
+        const nextMedia = mediaCards[index + 1]; // Utiliser le tableau pour obtenir la carte suivante
         if (nextMedia) {
-          const nextMediaCard = mediasSection.querySelector(
-            `#media-${nextMedia.id}`
-          );
-          if (nextMediaCard) {
-            nextMediaCard.focus();
-          }
+          nextMedia.focus();
         } else {
-          const firstMediaCard = mediasSection.querySelector(".card-media");
-          if (firstMediaCard) {
-            firstMediaCard.focus();
-          }
+          mediaCards[0].focus(); // Retourner à la première carte si la dernière est atteinte
         }
+      } else if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        displayModalLightbox(index);
       }
     });
   });
@@ -147,10 +143,8 @@ async function sortAndDisplayMedia(sortType) {
     return;
   }
 
-  // Sélectionner toutes les cartes
   const mediaCards = Array.from(mediaContainer.querySelectorAll(".card-media"));
 
-  // Trier les cartes en fonction du type de tri
   mediaCards.sort((a, b) => {
     const aValue = a.getAttribute(`data-${sortType}`);
     const bValue = b.getAttribute(`data-${sortType}`);
@@ -162,10 +156,8 @@ async function sortAndDisplayMedia(sortType) {
     }
   });
 
-  // Effacer le contenu du conteneur de médias
   mediaContainer.innerHTML = "";
 
-  // Ajouter les cartes triées dans le conteneur
   mediaCards.forEach((mediaCard) => {
     mediaContainer.appendChild(mediaCard);
   });
@@ -198,12 +190,11 @@ async function initDropdown(id) {
 }
 
 // INSERT
-let insertsData = new Map(); // Map to store the insert data
+let insertsData = new Map();
 
 async function getInsert(photographerId) {
   photographerId = parseInt(photographerId);
 
-  // Check if the insert data for this photographer id already exists
   if (insertsData.has(photographerId)) {
     return insertsData.get(photographerId);
   }
@@ -221,7 +212,6 @@ async function getInsert(photographerId) {
 
   let insert = { photographerId, sumLikes, price };
 
-  // Store the insert data in the map
   insertsData.set(photographerId, insert);
 
   return insert;
