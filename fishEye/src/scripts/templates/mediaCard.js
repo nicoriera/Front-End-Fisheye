@@ -10,9 +10,11 @@ class MediaCard {
     media.setAttribute("aria-label", `View ${this._media.title}`);
     media.setAttribute("data-date", `${this._media.date}`);
     media.setAttribute("data-title", `${this._media.title}`);
+
     const link = document.createElement("a");
     link.classList.add("card-media-link");
     link.setAttribute("aria-label", `View ${this._media.title}`);
+    link.setAttribute("alt", `View ${this._media.title}`);
     link.addEventListener("click", (e) => {
       e.preventDefault();
       displayModalLightbox();
@@ -22,33 +24,36 @@ class MediaCard {
     if (this._media.image) {
       mediaElement = document.createElement("img");
       mediaElement.setAttribute("src", this._media.image);
+      mediaElement.setAttribute("alt", `Image de ${this._media.title}`);
+      mediaElement.setAttribute("aria-label", `Image de ${this._media.title} `);
     } else if (this._media.video) {
       mediaElement = document.createElement("video");
       mediaElement.setAttribute("src", this._media.video);
+      mediaElement.setAttribute("alt", `Vidéo de ${this._media.title}`);
+      mediaElement.setAttribute("aria-label", `Vidéo de ${this._media.title} `);
     }
     mediaElement.classList.add("card-media-img");
-    mediaElement.setAttribute("alt", this._media.name);
-    mediaElement.setAttribute(
-      "aria-label",
-      `Image of photographer ${this._media.name}`
-    );
 
     const info = document.createElement("div");
     info.classList.add("card-media-info");
     const title = document.createElement("p");
     title.classList.add("card-media-title");
     title.textContent = this._media.title;
+    title.setAttribute("aria-label", `Titre: ${this._media.title}`);
+
     const like = document.createElement("div");
     like.classList.add("card-media-like");
     const heart = document.createElement("i");
     heart.classList.add("fas", "fa-heart", "like-button");
     heart.setAttribute("aria-label", "likes");
+    heart.setAttribute("role", "button");
+    heart.setAttribute("alt", "like button");
     const likes = document.createElement("p");
     likes.textContent = this._media.likes;
 
     const addLike = (e) => {
       e.preventDefault();
-      this.likes++;
+      this._media.like();
       likes.textContent = this._media.likes;
       e.target.removeEventListener("click", addLike);
     };

@@ -1,8 +1,28 @@
 class Insert {
   constructor(data) {
-    this.sumLikes = data.sumLikes;
-    this.price = data.price;
-    this.likesElement = null;
+    this._photographerId = data.photographerId;
+    this._sumLikes = data.sumLikes;
+    this._price = data.price;
+    this._likesElement = null;
+  }
+
+  get photographerId() {
+    return this._photographerId;
+  }
+
+  get sumLikes() {
+    return this._sumLikes;
+  }
+
+  get price() {
+    return this._price;
+  }
+
+  set sumLikes(value) {
+    this._sumLikes = value;
+    if (this._likesElement) {
+      this._likesElement.textContent = this._sumLikes;
+    }
   }
 
   createInsert() {
@@ -13,15 +33,15 @@ class Insert {
     const like = document.createElement("div");
     like.classList.add("insert-like");
     const numberLikes = document.createElement("p");
-    numberLikes.textContent = this.sumLikes;
-    this.likesElement = document.createElement("p");
-    this.likesElement.textContent = this.sumLikes;
+    numberLikes.textContent = this._sumLikes;
+    this._likesElement = document.createElement("p");
+    this._likesElement.textContent = this._sumLikes;
     const heart = document.createElement("i");
     heart.classList.add("fas", "fa-heart");
     const priceContent = document.createElement("div");
     priceContent.classList.add("insert-price");
     const price = document.createElement("p");
-    price.textContent = `${this.price}€ / jour`;
+    price.textContent = `${this._price}€ / jour`;
     priceContent.appendChild(price);
     like.appendChild(numberLikes);
     like.appendChild(heart);
@@ -30,13 +50,6 @@ class Insert {
     insert.appendChild(content);
 
     return insert;
-  }
-
-  updateLikes() {
-    this.sumLikes++;
-    if (this.likesElement) {
-      this.likesElement.textContent = this.sumLikes;
-    }
   }
 }
 

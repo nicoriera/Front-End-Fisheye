@@ -79,6 +79,8 @@ $hover-scale: 1.2;
   }
 
   .lightbox-nav-close {
+    position: absolute;
+    top: 8rem;
     svg {
       &:hover {
         transform: scale($hover-scale) rotate(180deg);

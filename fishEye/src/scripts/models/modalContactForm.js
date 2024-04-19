@@ -74,6 +74,7 @@ class ModalForm {
       const label = document.createElement("label");
       label.classList.add(`modal-form-${inputName}`);
       label.textContent = labelText;
+      label.htmlFor = inputId;
 
       let input;
       if (inputType === "textarea") {
