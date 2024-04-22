@@ -6,25 +6,6 @@ class Insert {
     this._likesElement = null;
   }
 
-  get photographerId() {
-    return this._photographerId;
-  }
-
-  get sumLikes() {
-    return this._sumLikes;
-  }
-
-  get price() {
-    return this._price;
-  }
-
-  set sumLikes(value) {
-    this._sumLikes = value;
-    if (this._likesElement) {
-      this._likesElement.textContent = this._sumLikes;
-    }
-  }
-
   createInsert() {
     const insert = document.createElement("div");
     insert.classList.add("insert");
