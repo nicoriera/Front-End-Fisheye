@@ -6,15 +6,14 @@ Ce projet contient les fichiers nécessaires pour exécuter une application web 
 
 Dans le répertoire du projet, vous pouvez exécuter :
 
-### `npm start`
+### `npm run dev`
 
 Lance l'application en mode développement.\
+
 Ouvre automatiquement votre navigateur par défaut à l'adresse [http://localhost:8080](http://localhost:8080) pour afficher votre application.
 
 Le projet se recharge automatiquement si vous apportez des modifications au code source.\
 Vous pouvez également consulter la console du navigateur pour voir les erreurs éventuelles.
-
-### `npm run dev`
 
 Cette commande lance à la fois le script pour surveiller les modifications dans les fichiers Sass et le script pour démarrer l'application en mode développement.
 
@@ -28,4 +27,4 @@ Pour démarrer le projet, assurez-vous d'avoir Node.js et npm installés sur vot
 
 1. Clônez ce dépôt sur votre machine locale.
 2. Exécutez `npm install` pour installer les dépendances.
-3. Exécutez `npm start` pour démarrer l'application en mode développement.
+3. Exécutez `npm run dev` pour démarrer l'application en mode développement.
