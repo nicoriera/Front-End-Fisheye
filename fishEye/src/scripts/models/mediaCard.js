@@ -27,13 +27,14 @@ class MediaCard {
       mediaElement.setAttribute("src", this._media.image);
       mediaElement.setAttribute("alt", `Image de ${this._media.title}`);
       mediaElement.setAttribute("aria-label", `Image de ${this._media.title} `);
+      mediaElement.classList.add("card-media-img");
     } else if (this._media.video) {
       mediaElement = document.createElement("video");
       mediaElement.setAttribute("src", this._media.video);
       mediaElement.setAttribute("alt", `Vidéo de ${this._media.title}`);
       mediaElement.setAttribute("aria-label", `Vidéo de ${this._media.title} `);
+      mediaElement.classList.add("card-media-video");
     }
-    mediaElement.classList.add("card-media");
 
     const info = document.createElement("div");
     info.classList.add("card-media-info");

@@ -12,6 +12,7 @@ function closeModalContact() {
   modal.style.display = "none";
   document.body.classList.remove("no-scroll");
   modal.setAttribute("aria-hidden", "true");
+  modal.setAttribute("aria-modal", "false");
 }
 
 function toggleContactForm() {
