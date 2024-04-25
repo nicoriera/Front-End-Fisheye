@@ -12,7 +12,7 @@ async function displayData(photographer) {
   }
 
   const photographersSection = document.querySelector(".photograph-header");
-  const photographerModel = photographerTemplate(photographer);
+  const photographerModel = photographHeader(photographer);
   const userCardDOM = photographerModel.getUserCardDOM();
   photographersSection.insertAdjacentHTML("afterbegin", userCardDOM.outerHTML);
 }

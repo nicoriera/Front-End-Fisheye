@@ -13,15 +13,15 @@ class Insert {
     content.classList.add("insert-content");
     const like = document.createElement("div");
     like.classList.add("insert-like");
-    const numberLikes = document.createElement("p");
+    const numberLikes = document.createElement("h3");
     numberLikes.textContent = this._sumLikes;
-    this._likesElement = document.createElement("p");
+    this._likesElement = document.createElement("h3");
     this._likesElement.textContent = this._sumLikes;
     const heart = document.createElement("i");
     heart.classList.add("fas", "fa-heart");
     const priceContent = document.createElement("div");
     priceContent.classList.add("insert-price");
-    const price = document.createElement("p");
+    const price = document.createElement("h3");
     price.textContent = `${this._price}€ / jour`;
     priceContent.appendChild(price);
     like.appendChild(numberLikes);

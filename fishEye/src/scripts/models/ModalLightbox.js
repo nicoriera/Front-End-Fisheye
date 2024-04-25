@@ -19,12 +19,6 @@ class ModalLightbox {
     lightboxMedia.appendChild(this.createMediaElement(this._media[index]));
   }
 
-  closeModaLightbox() {
-    const modalLightbox = document.getElementById("lightbox_modal");
-    modalLightbox.style.display = "none";
-    document.body.classList.remove("no-scroll");
-  }
-
   previousMedia() {
     this._currentMediaIndex =
       (this._currentMediaIndex - 1 + this._media.length) % this._media.length;
@@ -49,6 +43,13 @@ class ModalLightbox {
   createMediaElement(media) {
     const mediaElement = document.createElement(media.type);
     mediaElement.setAttribute("src", media.src);
+
+    if (media.type === "img") {
+      mediaElement.setAttribute("alt", media.title);
+    } else if (media.type === "video") {
+      mediaElement.setAttribute("title", media.title);
+      mediaElement.setAttribute("aria-label", media.title);
+    }
 
     if (media.type === "video") {
       mediaElement.setAttribute("controls", "true");
@@ -102,6 +103,7 @@ class ModalLightbox {
   createNavButton(className, pathData) {
     const nav = document.createElement("button");
     nav.classList.add(className);
+    nav.setAttribute("tabindex", "0");
     nav.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none">
       <path d="${pathData}" fill="#911C1C"/>
     </svg>`;
@@ -117,6 +119,7 @@ class ModalLightbox {
   createCloseButton() {
     const closeNav = document.createElement("button");
     closeNav.classList.add("lightbox-nav-close");
+    closeNav.setAttribute("tabindex", "0");
     closeNav.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none">
       <g clip-path="url(#clip0_120_794)">
         <path d="M57 19.23L52.77 15L36 31.77L19.23 15L15 19.23L31.77 36L15 52.77L19.23 57L36 40.23L52.77 57L57 52.77L40.23 36L57 19.23Z" fill="#911C1C"/>
