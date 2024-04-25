@@ -1,6 +1,7 @@
 class MediaCard {
-  constructor(media) {
+  constructor(media, insertManager) {
     this._media = media;
+    this._insertManager = insertManager;
   }
 
   createCard() {
@@ -56,6 +57,7 @@ class MediaCard {
       this._media.like();
       likes.textContent = this._media.likes;
       e.target.removeEventListener("click", addLike);
+      this._insertManager.updateSumLikes(this._media.likes);
     };
 
     heart.addEventListener("click", addLike);
