@@ -101,6 +101,7 @@ class ModalForm {
 
       const error = document.createElement("div");
       error.classList.add(`modal-form-${inputName}-error`);
+      error.classList.add("error-message");
 
       input.addEventListener("input", (event) => {
         if (event.target.value.trim() === "") {

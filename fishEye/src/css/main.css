@@ -431,14 +431,16 @@ form button:hover {
   background-color: #b71c1c;
 }
 
-.modal-form-firstname-error,
-.modal-form-name-error,
-.modal-form-email-error,
 .modal-form-message-error {
-  color: #ff0000;
+  margin-top: 0.4rem;
+}
+
+.error-message {
+  color: #000000;
   font-size: 0.8rem;
   font-family: "DM Sans";
   margin-bottom: 0.4rem;
+  align-items: flex-end;
 }
 
 .error-input {
@@ -450,6 +452,8 @@ form button:hover {
   font-family: "DM Sans";
   margin-bottom: 0.4rem;
   align-items: center;
+  display: block;
+  color: #ff0000;
 }
 
 #lightbox_modal {

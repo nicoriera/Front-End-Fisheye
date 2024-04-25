@@ -17,7 +17,10 @@ async function displayDataContactForm(contactForm) {
   contactFormSection.appendChild(userContactForm);
 
   const form = document.querySelector(".modal-form-element");
-  form.addEventListener("submit", contactFormObj.handleSubmit);
+  form.addEventListener(
+    "submit",
+    contactFormObj.handleSubmit.bind(contactFormObj)
+  );
 }
 
 async function initContactForm(id) {
