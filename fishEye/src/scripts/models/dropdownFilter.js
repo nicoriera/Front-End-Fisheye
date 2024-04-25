@@ -7,6 +7,17 @@ class DropdownFilter {
   createDropdownFilter() {
     const dropdownFilter = document.createElement("div");
     dropdownFilter.classList.add("dropdown");
+    dropdownFilter.setAttribute("aria-label", "Trier par popularité");
+    dropdownFilter.setAttribute("aria-haspopup", "listbox");
+    dropdownFilter.setAttribute("aria-expanded", "false");
+    dropdownFilter.setAttribute("aria-activedescendant", "dropdownButton");
+    dropdownFilter.setAttribute("aria-selected", "");
+    dropdownFilter.setAttribute("role", "listbox");
+    const label = document.createElement("label");
+    label.classList.add("dropdown-label");
+    label.textContent = "Trier par";
+    label.setAttribute("for", "dropdownButton");
+    dropdownFilter.appendChild(label);
     const button = document.createElement("button");
     button.id = "dropdownButton";
     button.classList.add("dropdown-button");
@@ -14,7 +25,7 @@ class DropdownFilter {
     button.setAttribute("aria-haspopup", "listbox");
     button.setAttribute("aria-expanded", "false");
     button.onclick = toggleDropdown;
-    button.textContent = "Trier par";
+    button.textContent = "Popularité";
     const icon = document.createElement("i");
     icon.id = "dropdownIcon";
     icon.classList.add("dropdown-icon", "fa-solid", "fa-chevron-down");
