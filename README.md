@@ -8,7 +8,7 @@ Dans le répertoire du projet, vous pouvez exécuter :
 
 ### `npm run dev`
 
-Lance l'application en mode développement.\
+Lance l'application en mode développement.
 
 Ouvre automatiquement votre navigateur par défaut à l'adresse [http://localhost:8080](http://localhost:8080) pour afficher votre application.
 
