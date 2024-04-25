@@ -1,3 +1,4 @@
+// Function to generate HTML markup for a photographer's user card
 function photographerTemplate(data) {
   const { name, portrait, country, city, tagline, price, id } = data;
 
@@ -32,6 +33,7 @@ function photographerTemplate(data) {
     priceElement.textContent = `${price}€/jour`;
     priceElement.classList.add("photographer-price");
 
+    // Append elements to construct the photographer's user card
     card.appendChild(link);
     link.appendChild(image);
     link.appendChild(heading);
