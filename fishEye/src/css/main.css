@@ -345,8 +345,10 @@ article .photographer-price {
   width: 100%;
 }
 
-.modal-form header img {
+.modal-form header button {
   cursor: pointer;
+  background: none;
+  border: none;
 }
 
 .modal-form header h2 {

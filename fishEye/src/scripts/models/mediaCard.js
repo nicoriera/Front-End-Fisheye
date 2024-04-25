@@ -33,7 +33,7 @@ class MediaCard {
       mediaElement.setAttribute("alt", `Vidéo de ${this._media.title}`);
       mediaElement.setAttribute("aria-label", `Vidéo de ${this._media.title} `);
     }
-    mediaElement.classList.add("card-media-img");
+    mediaElement.classList.add("card-media");
 
     const info = document.createElement("div");
     info.classList.add("card-media-info");

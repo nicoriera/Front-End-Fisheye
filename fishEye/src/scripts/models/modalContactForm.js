@@ -7,25 +7,27 @@ class ModalForm {
     const modalForm = document.createElement("div");
     modalForm.classList.add("modal-form");
     modalForm.setAttribute("role", "dialog");
-    modalForm.setAttribute("aria-labelledby", "modal-form-title");
-    modalForm.setAttribute("aria-describedby", "modal-form-description");
+    modalForm.setAttribute("aria-modal", "true");
     modalForm.setAttribute("aria-hidden", "true");
+    modalForm.setAttribute("tabindex", "0");
 
     const modalFormHeader = document.createElement("header");
     modalFormHeader.classList.add("modal-form-header");
 
     const modalFormTitle = document.createElement("h2");
     modalFormTitle.classList.add("modal-form-title");
+    modalFormTitle.setAttribute("aria-labelledby", "modal-form-title");
     modalFormTitle.id = "modal-form-title";
     modalFormTitle.textContent = `Contactez-moi ${this._name}`;
     modalFormHeader.appendChild(modalFormTitle);
 
-    const modalCloseButton = document.createElement("img");
+    const modalCloseButton = document.createElement("button");
     modalCloseButton.classList.add("modal-close-button");
-    modalCloseButton.setAttribute("role", "button");
+    modalCloseButton.setAttribute("type", "button");
     modalCloseButton.setAttribute("aria-label", "Fermer la fenêtre modale");
-    modalCloseButton.src = "./src/assets/icons/close.svg";
-    modalCloseButton.alt = "Fermer la fenêtre modale";
+    modalCloseButton.addEventListener("click", closeModalContact); // Added event listener to handle closing
+    modalCloseButton.innerHTML =
+      '<img src="./src/assets/icons/close.svg" alt="Fermer la fenêtre modale">'; // Added image inside button
     modalFormHeader.appendChild(modalCloseButton);
 
     const modalFormElement = document.createElement("form");
@@ -40,7 +42,6 @@ class ModalForm {
       event.preventDefault();
 
       // Vérifiez la validité de vos champs d'entrée ici
-
       let allFieldsAreValid = true;
       const inputs = modalFormElement.querySelectorAll("input, textarea");
       inputs.forEach((input) => {
@@ -146,6 +147,8 @@ class ModalForm {
 
     const modalFormSubmit = document.createElement("button");
     modalFormSubmit.classList.add("modal-form-submit");
+    modalFormSubmit.setAttribute("type", "submit");
+    modalFormSubmit.setAttribute("aria-label", "Envoyer le message");
     modalFormSubmit.type = "submit";
     modalFormSubmit.textContent = "Envoyer";
     modalFormElement.appendChild(modalFormSubmit);

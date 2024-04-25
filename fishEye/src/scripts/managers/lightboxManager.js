@@ -34,7 +34,7 @@ async function displayDataLightbox(lightbox, initialIndex) {
   lightboxSection.appendChild(userLightbox); // Append the lightbox element to the section
 
   const closeNav = document.querySelector(".lightbox-nav-close");
-  closeNav.onclick = () => lightboxObj.closeModaLightbox();
+  closeNav.onclick = () => closeModaLightbox();
 
   const leftNav = document.querySelector(".lightbox-nav-left");
   leftNav.onclick = () => lightboxObj.previousMedia();
@@ -44,7 +44,7 @@ async function displayDataLightbox(lightbox, initialIndex) {
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-      lightboxObj.closeModaLightbox();
+      closeModaLightbox();
     } else if (event.key === "ArrowLeft") {
       lightboxObj.previousMedia();
     } else if (event.key === "ArrowRight") {

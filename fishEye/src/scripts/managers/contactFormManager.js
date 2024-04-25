@@ -18,19 +18,6 @@ async function displayDataContactForm(contactForm) {
 
   const form = document.querySelector(".modal-form-element");
   form.addEventListener("submit", contactFormObj.handleSubmit);
-
-  const closeContactForm = document.querySelector(".modal-close-button");
-  closeContactForm.onclick = () => {
-    contactFormSection.style.display = "none";
-    document.body.classList.remove("no-scroll");
-  };
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      contactFormSection.style.display = "none";
-      document.body.classList.remove("no-scroll");
-    }
-  });
 }
 
 async function initContactForm(id) {

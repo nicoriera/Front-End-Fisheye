@@ -13,10 +13,9 @@ class DropdownFilter {
     dropdownFilter.setAttribute("aria-activedescendant", "dropdownButton");
     dropdownFilter.setAttribute("aria-selected", "");
     dropdownFilter.setAttribute("role", "listbox");
-    const label = document.createElement("label");
+    const label = document.createElement("h3");
     label.classList.add("dropdown-label");
     label.textContent = "Trier par";
-    label.setAttribute("for", "dropdownButton");
     dropdownFilter.appendChild(label);
     const button = document.createElement("button");
     button.id = "dropdownButton";

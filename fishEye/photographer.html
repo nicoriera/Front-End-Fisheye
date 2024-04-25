@@ -27,22 +27,27 @@
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">
+        <button class="contact_button" onclick="toggleContactForm()">
           Contactez-moi
         </button>
       </div>
       <div id="photograph-filter"></div>
       <div id="content-media"></div>
     </main>
-    <div id="contact_modal">
-     
-      </div>
-    </div>
+    <div id="contact_modal"></div>
+
     <div id="lightbox_modal"></div>
+
+    <!-- Templates -->
     <script src="./src/scripts/templates/photographHeader.js"></script>
-    <script src="./src/scripts/templates/mediaCard.js"></script>
+    <!-- Models -->
+    <script src="./src/scripts/models/mediaCard.js"></script>
     <script src="./src/scripts/models/pictureMedia.js"></script>
     <script src="./src/scripts/models/videoMedia.js"></script>
+    <script src="./src/scripts/models/insert.js"></script>
+    <script src="./src/scripts/models/modalLightbox.js"></script>
+    <script src="./src/scripts/models/modalContactForm.js"></script>
+    <script src="./src/scripts/models/dropdownFilter.js"></script>
     <!-- Managers -->
     <script src="./src/scripts/managers/photographerManager.js"></script>
     <script src="./src/scripts/managers/mediaManager.js"></script>
@@ -51,13 +56,11 @@
     <script src="./src/scripts/managers/contactFormManager.js"></script>
     <script src="./src/scripts/managers/lightboxManager.js"></script>
     <script src="./src/scripts/factories/mediasFactory.js"></script>
-
-    <script src="./src/scripts/models/insert.js"></script>
-    <script src="./src/scripts/models/modalLightbox.js"></script>
-    <script src="./src/scripts/models/modalContactForm.js"></script>
-    <script src="./src/scripts/models/dropdownFilter.js"></script>
+    <!-- Pages -->
     <script src="./src/scripts/pages/photographer.js"></script>
-    <script src="./src/scripts/utils/contactForm.js"></script>
-    <script src="./src/scripts/utils/modalLightbox.js"></script>
+    <!-- Utils -->
+    <script src="./src/scripts/utils/toggleContactForm.js"></script>
+    <script src="./src/scripts/utils/toggleModalLightbox.js "></script>
+    <script src="./src/scripts/utils/toggleDropdown.js"></script>
   </body>
 </html>
