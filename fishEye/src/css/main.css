@@ -27,7 +27,7 @@ body {
   margin: 0 100px;
   padding: 2rem 0;
   color: #000;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
@@ -42,7 +42,7 @@ article a {
 article .photographer-name {
   color: #d3573c;
   text-align: center;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
   font-size: 2.25rem;
   font-style: normal;
   font-weight: 400;
@@ -51,7 +51,7 @@ article .photographer-name {
 article .photographer-location {
   color: #901c1c;
   text-align: center;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
@@ -60,7 +60,7 @@ article .photographer-location {
 article .photographer-tagline {
   color: #000;
   text-align: center;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
   font-size: 0.8rem;
   font-style: normal;
   font-weight: 400;
@@ -69,7 +69,7 @@ article .photographer-tagline {
 article .photographer-price {
   color: #525252;
   text-align: center;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
   font-size: 0.7rem;
   font-style: normal;
   font-weight: 400;
@@ -250,7 +250,7 @@ article .photographer-price {
   justify-content: space-between;
   align-items: center;
   color: #901c1c;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
@@ -353,7 +353,7 @@ article .photographer-price {
 
 .modal-form header h2 {
   color: #000;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
   font-size: 3.6rem;
   font-style: normal;
   font-weight: 400;
@@ -373,7 +373,7 @@ form {
 form label {
   color: #312e2e;
   font-size: 2rem;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
   margin-bottom: 0.2rem;
 }
 
@@ -396,7 +396,7 @@ form input {
 form input::placeholder {
   color: #312e2e;
   font-size: 36px;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
 }
 
 .modal-form-message-input {
@@ -408,7 +408,7 @@ form input::placeholder {
 form textarea::placeholder {
   color: #312e2e;
   font-size: 36px;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
 }
 
 form button {
@@ -438,7 +438,7 @@ form button:hover {
 .error-message {
   color: #000000;
   font-size: 0.8rem;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
   margin-bottom: 0.4rem;
   align-items: flex-end;
 }
@@ -449,7 +449,7 @@ form button:hover {
 
 .modal-form-validation-message {
   font-size: 4rem;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
   margin-bottom: 0.4rem;
   align-items: center;
   display: block;

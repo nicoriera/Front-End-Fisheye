@@ -11,8 +11,8 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 0.3125rem;
-  background: #901c1c;
-  color: #fff;
+  background: $primary-color;
+  color: $text-color-quaternary;
   text-align: left;
   padding: 21px;
   width: 170px;
@@ -32,8 +32,8 @@
   top: 6rem;
   left: 6.3rem;
   border-radius: 0.3125rem;
-  background: #901c1c;
-  color: #fff;
+  background: $primary-color;
+  color: $text-color-quaternary;
   width: 170px;
   height: 110px;
   font-family: "DM Sans";
@@ -46,14 +46,14 @@
 
 .dropdown-menu-item {
   align-items: center;
-  border-top-color: #fff;
+  border-top-color: $text-color-quaternary;
   border-top-style: solid;
   border-top-width: 1px;
   border-bottom: none;
   border-left: none;
   border-right: none;
-  background: #901c1c;
-  color: #fff;
+  background: $primary-color;
+  color: $text-color-quaternary;
   text-align: left;
   padding: 21px;
   width: 170px;

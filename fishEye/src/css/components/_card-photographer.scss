@@ -7,7 +7,7 @@ article {
   .photographer-name {
     color: $text-color-primary;
     text-align: center;
-    font-family: "DM Sans";
+    font-family: $base-font-family;
     font-size: 2.25rem;
     font-style: normal;
     font-weight: 400;
@@ -17,16 +17,16 @@ article {
   .photographer-location {
     color: $text-color-secondary;
     text-align: center;
-    font-family: "DM Sans";
+    font-family: $base-font-family;
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
   }
   .photographer-tagline {
-    color: #000;
+    color: $text-color;
     text-align: center;
-    font-family: "DM Sans";
+    font-family: $base-font-family;
     font-size: 0.8rem;
     font-style: normal;
     font-weight: 400;
@@ -35,7 +35,7 @@ article {
   .photographer-price {
     color: $text-color-tertiary;
     text-align: center;
-    font-family: "DM Sans";
+    font-family: $base-font-family;
     font-size: 0.7rem;
     font-style: normal;
     font-weight: 400;
