@@ -52,6 +52,7 @@ class MediaCard {
     heart.setAttribute("alt", "like button");
     const likes = document.createElement("p");
     likes.textContent = this._media.likes;
+    likes.setAttribute("aria-label", `Likes: ${this._media.likes}`);
 
     const addLike = (e) => {
       e.preventDefault();

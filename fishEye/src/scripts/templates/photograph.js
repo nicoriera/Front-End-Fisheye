@@ -20,18 +20,22 @@ function photographerTemplate(data) {
     const heading = document.createElement("h2");
     heading.textContent = name;
     heading.classList.add("photographer-name");
+    heading.setAttribute("aria-label", `Nom du photographe: ${name}`);
 
     const location = document.createElement("p");
     location.textContent = `${country}, ${city}`;
     location.classList.add("photographer-location");
+    location.setAttribute("aria-label", `Localisation: ${country}, ${city}`);
 
     const tagLine = document.createElement("p");
     tagLine.textContent = tagline;
     tagLine.classList.add("photographer-tagline");
+    tagLine.setAttribute("aria-label", `Tagline: ${tagline}`);
 
     const priceElement = document.createElement("p");
     priceElement.textContent = `${price}€/jour`;
     priceElement.classList.add("photographer-price");
+    priceElement.setAttribute("aria-label", `Tarif: ${price}€/jour`);
 
     // Append elements to construct the photographer's user card
     card.appendChild(link);
