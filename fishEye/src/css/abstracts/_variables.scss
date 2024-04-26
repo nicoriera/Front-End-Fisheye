@@ -3,10 +3,11 @@
 $primary-color: #901c1c;
 $secondary-color: #db8876;
 $tertiary-color: #fafafa;
-$text-color: #0000;
+$text-color: #000;
 $text-color-primary: #d3573c;
 $text-color-secondary: #901c1c;
 $text-color-tertiary: #525252;
+$text-color-quaternary: #fff;
 
 // Polices
 // Remplacez 'Helvetica' et 'Georgia' par les polices que vous utilisez réellement dans votre projet
@@ -22,7 +23,3 @@ $base-padding: 10px;
 // Ces valeurs sont des suppositions, remplacez-les par les tailles de police que vous utilisez réellement dans votre projet
 $base-font-size: 16px;
 $heading-font-size: 32px;
-
-// Images
-// Remplacez 'photographer-placeholder' par le chemin d'accès réel à votre image de remplacement
-$photographer-placeholder: url("./src/assets/photographers/Photographers_ID_Photos/photographer-placeholder.jpg");

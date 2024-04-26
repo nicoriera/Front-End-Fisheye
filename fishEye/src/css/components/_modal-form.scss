@@ -37,8 +37,8 @@
 }
 
 .modal-form header h2 {
-  color: #000;
-  font-family: "DM Sans";
+  color: $text-color;
+  font-family: $base-font-family;
   font-size: 3.6rem;
   font-style: normal;
   font-weight: 400;
@@ -58,7 +58,7 @@ form {
 form label {
   color: #312e2e;
   font-size: 2rem;
-  font-family: "DM Sans";
+  font-family: $base-font-family;
   margin-bottom: 0.2rem;
 }
 
@@ -81,7 +81,7 @@ form input {
 form input::placeholder {
   color: #312e2e;
   font-size: 36px;
-  font-family: "DM Sans";
+  font-family: $base-font-family;
 }
 
 .modal-form-message-input {
@@ -93,7 +93,7 @@ form input::placeholder {
 form textarea::placeholder {
   color: #312e2e;
   font-size: 36px;
-  font-family: "DM Sans";
+  font-family: $base-font-family;
 }
 
 form button {
@@ -107,7 +107,7 @@ form button {
   width: 170px;
   height: 70px;
   border: none;
-  background-color: #901c1c;
+  background-color: $primary-color;
   border-radius: 5px;
   cursor: pointer;
 
@@ -125,7 +125,7 @@ form button {
 .error-message {
   color: #000000;
   font-size: 0.8rem;
-  font-family: "DM Sans";
+  font-family: $base-font-family;
   margin-bottom: 0.4rem;
   align-items: flex-end;
 }
@@ -136,7 +136,7 @@ form button {
 
 .modal-form-validation-message {
   font-size: 4rem;
-  font-family: "DM Sans";
+  font-family: $base-font-family;
   margin-bottom: 0.4rem;
   align-items: center;
   display: block;
